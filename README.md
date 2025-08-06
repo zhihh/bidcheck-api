@@ -45,11 +45,29 @@ src/
 ### 1. 克隆项目
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/zhihh/bidcheck-api.git
 cd bidcheck-api
 ```
 
 ### 2. 环境配置
+
+#### 通过 config.py 配置
+
+修改 `src/config/config.py` 文件中的默认配置：
+
+```python
+
+        os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY", "")
+        os.environ["OPENAI_BASE_URL"] = os.getenv("OPENAI_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
+        
+        # 模型配置
+        os.environ["LLM_MODEL_NAME"] = os.getenv("LLM_MODEL_NAME", "qwen-turbo")
+        os.environ["EMBEDDING_MODEL_NAME"] = os.getenv("EMBEDDING_MODEL_NAME", "text-embedding-v4")
+```
+
+或手动设置环境变量。
+
+#### 通过`.env`文件配置
 
 创建 `.env` 文件并配置以下环境变量：
 
@@ -62,10 +80,6 @@ OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 LLM_MODEL_NAME=qwen-turbo
 EMBEDDING_MODEL_NAME=text-embedding-v4
 
-# LangSmith追踪配置（可选）
-LANGSMITH_TRACING=true
-LANGSMITH_API_KEY=your_langsmith_key
-LANGSMITH_PROJECT=BidCheck
 ```
 
 ### 3. 部署方式
