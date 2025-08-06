@@ -1,0 +1,47 @@
+# Git
+.git
+.gitignore
+README.md
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs (本地日志不打包进镜像)
+logs/
+*.log
+
+# Test files
+test/
+*_test.py
+test_*.py
+
+# Jupyter notebooks
+notebook/
+*.ipynb
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Scripts (因为我们不需要额外脚本)
+scripts/

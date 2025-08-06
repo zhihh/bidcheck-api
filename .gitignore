@@ -1,0 +1,11 @@
+__pycache__/
+.github/
+.vscode/
+config/
+data/
+logs/
+notebook/
+scripts
+ssl/
+test/
+requirements.in
