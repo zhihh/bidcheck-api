@@ -91,7 +91,8 @@ class ValidationManager:
                 prefix2=prefix2,
                 suffix2=suffix2,
                 reason=result.reason,
-                score=result.score
+                score=result.score,
+                category=result.category
             )
             
             # 额外验证：检查内容长度合理性

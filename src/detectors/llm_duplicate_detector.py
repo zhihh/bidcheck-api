@@ -48,25 +48,38 @@ class LLMDuplicateDetector:
         self.direct_chain = self.direct_prompt | self.llm
     
     def _get_system_prompt(self) -> str:
-        return """你是一个专业的文档查重系统。你的任务是检测给定文本片段中是否存在重复或抄袭内容，并输出JSON格式的结果。
+        return """你是一个专业的文档分析系统。你的任务是检测给定文本片段中的三种问题类型，并输出JSON格式的结果。
 
-**检测标准：**
-1. 完全相同的文本（逐字相同）
-2. 高度相似的文本（仅有微小差异，如标点、空格、同义词替换）
-3. 意思相同但表达略有不同的文本
-4. 结构相似、逻辑相同的文本
+**检测类型：**
+类别1 - 语义相似/重复：
+- 完全相同的文本（逐字相同）
+- 高度相似的文本（仅有微小差异，如标点、空格、同义词替换）
+- 意思相同但表达略有不同的文本
+- 结构相似、逻辑相同的文本
+
+类别2 - 错误一致：
+- 相同的错别字（如"登录"都写成"登陆"）
+- 相同的用词错误（如专业术语使用错误但错误方式一致）
+- 相同的语法错误
+- 相同的格式错误
+
+类别3 - 报价异常：
+- 投标报价呈等差数列规律（如100万、200万、300万...）
+- 投标报价呈等比数列规律（如100万、200万、400万...）
+- 报价数值过于接近或有明显规律性
+- 报价结构异常相似
 
 **评分标准：**
-- 0.9-1.0: 完全相同或几乎相同
-- 0.7-0.9: 高度相似，可能是抄袭
-- 0.5-0.7: 中等相似，需要人工确认
-- 0.3-0.5: 低相似，可能是巧合
-- 0.0-0.3: 不相似
+- 0.9-1.0: 问题非常明显
+- 0.7-0.9: 问题较明显，需要关注
+- 0.5-0.7: 中等程度问题，需要人工确认
+- 0.3-0.5: 轻微问题
+- 0.0-0.3: 无问题
 
-请仔细分析每对文本片段，给出准确的判断。"""
+请仔细分析每对文本片段，识别问题类型并给出准确的判断。"""
     
     def _get_human_prompt(self) -> str:
-        return """请分析以下来自不同文档的文本片段，检测是否存在重复内容：
+        return """请分析以下来自不同文档的文本片段，检测三种问题类型：
 
 {text_segments}
 
@@ -84,7 +97,8 @@ class LLMDuplicateDetector:
       "chunkId2": 数字,
       "content2": "文本内容",
       "reason": "判断原因",
-      "score": 数字
+      "score": 数字,
+      "category": 数字
     }}
   ],
   "explanation": "整体判断说明"
@@ -92,32 +106,44 @@ class LLMDuplicateDetector:
 
 注意：
 1. 只比较来自不同文档的片段
-2. 如果发现重复，请在duplicate_pairs中详细列出每一对重复内容
-3. 每个duplicate_pair必须包含完整的documentId, page, chunkId, content信息
-4. explanation应该详细说明判断依据
-5. 返回的必须是有效的JSON格式，不要包含其他文字"""
+2. category字段：1-语义相似，2-错误一致，3-报价异常
+3. 如果发现问题，请在duplicate_pairs中详细列出每一对问题内容
+4. 每个duplicate_pair必须包含完整的documentId, page, chunkId, content, category信息
+5. explanation应该详细说明判断依据和问题类型
+6. 返回的必须是有效的JSON格式，不要包含其他文字"""
     
     def _get_direct_system_prompt(self) -> str:
         """直接比较两个完整文档的系统提示"""
-        return """你是一个专业的文档查重系统。你将接收到两个完整的文档，需要找出其中所有的重复或抄袭内容。
+        return """你是一个专业的文档分析系统。你将接收到两个完整的文档，需要找出其中的三种问题类型。
 
-**检测标准：**
-1. 完全相同的文本段落或句子
-2. 高度相似的文本（仅有微小差异，如标点、空格、同义词替换）  
-3. 意思相同但表达略有不同的文本段落
-4. 结构相似、逻辑相同的段落
+**检测类型：**
+类别1 - 语义相似/重复：
+- 完全相同的文本段落或句子
+- 高度相似的文本（仅有微小差异，如标点、空格、同义词替换）  
+- 意思相同但表达略有不同的文本段落
+- 结构相似、逻辑相同的段落
+
+类别2 - 错误一致：
+- 相同的错别字（如"登录"都写成"登陆"）
+- 相同的用词错误
+- 相同的语法错误
+- 相同的格式错误
+
+类别3 - 报价异常：
+- 投标报价呈等差数列或等比数列规律
+- 报价数值过于接近或有明显规律性
+- 报价结构异常相似
 
 **评分标准：**
-- 0.9-1.0: 完全相同或几乎相同
-- 0.7-0.9: 高度相似，可能是抄袭
-- 0.5-0.7: 中等相似，需要人工确认
-- 0.3-0.5: 低相似，可能是巧合
+- 0.9-1.0: 问题非常明显
+- 0.7-0.9: 问题较明显，需要关注
+- 0.5-0.7: 中等程度问题，需要人工确认
 
-请仔细分析两个文档，找出所有重复评分达到0.8分以上的重复内容。"""
+请仔细分析两个文档，找出所有评分达到0.8分以上的问题内容。"""
     
     def _get_direct_human_prompt(self) -> str:
         """直接比较两个完整文档的人类提示"""
-        return """请分析以下两个完整文档，找出其中所有的重复内容：
+        return """请分析以下两个完整文档，找出其中的三种问题类型：
 
 **文档1:**
 {document1}
@@ -125,27 +151,25 @@ class LLMDuplicateDetector:
 **文档2:**  
 {document2}
 
-请将每个重复的文本片段标记出来，并严格按照以下JSON格式返回结果：
+请将每个问题的文本片段标记出来，并严格按照以下JSON格式返回结果：
 {{
   "is_duplicate": true/false,
   "duplicate_pairs": [
     {{
-      "content1": "文档1中的重复片段",
-      "content2": "文档2中的重复片段", 
-      "reason": "判断原因",
+      "content1": "文档1中的问题片段",
+      "content2": "文档2中的问题片段", 
+      "reason": "问题说明",
       "score": 数字,
-      "position1": "在文档1中的大致位置描述",
-      "position2": "在文档2中的大致位置描述"
+      "category": 数字
     }}
   ],
   "explanation": "整体分析说明"
 }}
 
 注意：
-1. 仔细比较两个文档的每个段落和句子
-2. 只找出重复评分达到0.8分以上的内容对
-3. 只要有一个重复对达到0.8分以上，就认为"is_duplicate"为true
-4. 返回的必须是有效的JSON格式，不要包含其他文字"""
+1. category字段：1-语义相似，2-错误一致，3-报价异常
+2. 对于每个发现的问题，详细说明原因
+3. 返回有效的JSON格式，不要添加其他文字"""
     
     def detect_duplicates_parallel(self, clusters_dict: Dict[int, List[TextSegment]]) -> List[DuplicateOutput]:
         """并行检测多个聚类中的重复内容"""
@@ -250,7 +274,8 @@ class LLMDuplicateDetector:
                             prefix2=prefix2,
                             suffix2=suffix2,
                             reason=str(pair["reason"]),
-                            score=float(pair["score"])
+                            score=float(pair["score"]),
+                            category=int(pair.get("category", 1))  # 默认为语义相似
                         )
                         duplicate_outputs.append(output)
                     except (KeyError, ValueError, TypeError) as e:
@@ -345,9 +370,9 @@ class LLMDuplicateDetector:
                                         content2=content2,
                                         prefix2=prefix2,
                                         suffix2=suffix2,
-                                        # reason=f"[直接比较] {pair['reason']}",
-                                        reason= str(pair['reason']),
-                                        score=float(pair["score"])
+                                        reason=str(pair['reason']),
+                                        score=float(pair["score"]),
+                                        category=int(pair.get("category", 1))  # 默认为语义相似
                                     )
 
                                     results.append(output)
