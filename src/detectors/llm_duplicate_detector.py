@@ -14,6 +14,7 @@ from langchain.schema.runnable import RunnableLambda, RunnableParallel
 
 from ..models.api_models import DuplicateOutput
 from ..models.data_models import TextSegment, DocumentData
+from ..utils.text_utils import extract_prefix_suffix
 
 logger = logging.getLogger(__name__)
 
@@ -231,15 +232,23 @@ class LLMDuplicateDetector:
                 duplicate_outputs = []
                 for pair in result_dict["duplicate_pairs"]:
                     try:
+                        content1 = str(pair["content1"])
+                        content2 = str(pair["content2"])
+                        prefix1, suffix1 = extract_prefix_suffix(content1)
+                        prefix2, suffix2 = extract_prefix_suffix(content2)
                         output = DuplicateOutput(
                             documentId1=int(pair["documentId1"]),
                             page1=int(pair["page1"]),
                             chunkId1=int(pair["chunkId1"]),
-                            content1=str(pair["content1"]),
+                            content1=content1,
+                            prefix1=prefix1,
+                            suffix1=suffix1,
                             documentId2=int(pair["documentId2"]),
                             page2=int(pair["page2"]),
                             chunkId2=int(pair["chunkId2"]),
-                            content2=str(pair["content2"]),
+                            content2=content2,
+                            prefix2=prefix2,
+                            suffix2=suffix2,
                             reason=str(pair["reason"]),
                             score=float(pair["score"])
                         )
@@ -319,17 +328,25 @@ class LLMDuplicateDetector:
                                     page1 = self._find_content_page(content1, doc1)
                                     page2 = self._find_content_page(content2, doc2)
                                     
+                                    prefix1, suffix1 = extract_prefix_suffix(content1)
+                                    prefix2, suffix2 = extract_prefix_suffix(content2)
+                                    
                                     # 创建输出结果，使用精确的页面信息和固定的chunk_id
                                     output = DuplicateOutput(
                                         documentId1=doc1.document_id,
                                         page1=page1,  # 精确的页面信息
                                         chunkId1=0,   # 固定的chunk_id，表示直接比较
                                         content1=content1,
+                                        prefix1=prefix1,
+                                        suffix1=suffix1,
                                         documentId2=doc2.document_id,
                                         page2=page2,  # 精确的页面信息
                                         chunkId2=0,   # 固定的chunk_id，表示直接比较
                                         content2=content2,
-                                        reason=f"[直接比较] {pair['reason']}",
+                                        prefix2=prefix2,
+                                        suffix2=suffix2,
+                                        # reason=f"[直接比较] {pair['reason']}",
+                                        reason= str(pair['reason']),
                                         score=float(pair["score"])
                                     )
 

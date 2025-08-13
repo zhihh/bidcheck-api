@@ -1,7 +1,15 @@
 """
 验证管理器
-基于规则的溯源验证逻辑
+负责验证检测结果的准确性和溯源性
 """
+
+import logging
+from typing import List, Dict
+from difflib import SequenceMatcher
+
+from ..models.api_models import DuplicateOutput
+from ..models.data_models import DocumentData
+from ..utils.text_utils import extract_prefix_suffix
 
 import logging
 from typing import List, Dict, Any
@@ -63,15 +71,25 @@ class ValidationManager:
                 continue
             
             # 验证通过：用原文中对应的内容替换检测结果中的content
+            content1_validated = content1_match['matched_text']
+            content2_validated = content2_match['matched_text']
+            
+            prefix1, suffix1 = extract_prefix_suffix(content1_validated)
+            prefix2, suffix2 = extract_prefix_suffix(content2_validated)
+            
             validated_result = DuplicateOutput(
                 documentId1=result.documentId1,
                 page1=result.page1,
                 chunkId1=result.chunkId1,
-                content1=content1_match['matched_text'],  # 使用原文中的内容
+                content1=content1_validated,  # 使用原文中的内容
+                prefix1=prefix1,
+                suffix1=suffix1,
                 documentId2=result.documentId2,
                 page2=result.page2,
                 chunkId2=result.chunkId2,
-                content2=content2_match['matched_text'],  # 使用原文中的内容
+                content2=content2_validated,  # 使用原文中的内容
+                prefix2=prefix2,
+                suffix2=suffix2,
                 reason=result.reason,
                 score=result.score
             )

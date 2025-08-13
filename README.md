@@ -147,10 +147,14 @@ python main.py
       "page1": 1,
       "chunkId1": 0,
       "content1": "重复内容片段1",
+      "prefix1": "重复内容片段1",
+      "suffix1": "重复内容片段1",
       "documentId2": 2,
       "page2": 1,
       "chunkId2": 0,
       "content2": "重复内容片段2",
+      "prefix2": "重复内容片段2",
+      "suffix2": "重复内容片段2",
       "reason": "内容在语义上高度相似",
       "score": 0.95
     }
