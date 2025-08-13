@@ -30,6 +30,7 @@ class DuplicateOutput(BaseModel):
     suffix2: str = Field(description="第二个文档片段后缀预览")
     reason: str = Field(description="大模型判断的原因")
     score: float = Field(description="重复程度得分(0-1)")
+    category: int = Field(description="问题类别：1-语义相似，2-错误一致，3-报价异常")
 
 
 class ApiResponse(BaseModel):
