@@ -1,5 +1,5 @@
-# 使用Python 3.11官方镜像
-FROM python:3.11-slim
+# 使用Python 3.12官方镜像
+FROM python:3.12-slim
 
 # 设置工作目录
 WORKDIR /app
@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y \
 # 复制requirements文件并安装Python依赖
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+
+# Unset Proxy
+ENV HTTP_PROXY=""
+ENV HTTPS_PROXY=""
 
 # 复制应用代码
 COPY main.py .

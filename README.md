@@ -48,9 +48,9 @@ src/
 
 ### 环境要求
 
-- Python 3.11+
-- Docker 20.10+
-- Docker Compose 2.0+
+- Python 3.12
+- Docker 28.3.2
+- Docker Compose 2.39.1
 
 ### 1. 克隆项目
 

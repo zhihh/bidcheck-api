@@ -9,3 +9,8 @@ __pycache__/
 /ssl/
 /test/
 /requirements.in
+/.env
+/requirements.txt.bak
+/docker-compose.yml.bak
+
+
