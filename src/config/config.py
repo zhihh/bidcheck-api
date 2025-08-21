@@ -30,7 +30,7 @@ class Config:
         os.environ["LANGSMITH_PROJECT"] = "BidCheck"
         
         # 调试配置
-        os.environ["DEBUG_REQUEST_BODY"] = os.getenv("DEBUG_REQUEST_BODY", "true")
+        os.environ["DEBUG_REQUEST_BODY"] = os.getenv("DEBUG_REQUEST_BODY", "false")
     
     def _setup_logging(self):
         """设置日志配置"""

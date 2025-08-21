@@ -1,0 +1,612 @@
+[2025-08-21 12:03:16 +0800] [2330160] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 12:03:16 +0800] [2330160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2025-08-21 12:03:16 +0800] [2330160] [ERROR] connection to ('0.0.0.0', 8000) failed: [Errno 98] Address already in use
+[2025-08-21 12:03:17 +0800] [2330160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2025-08-21 12:03:17 +0800] [2330160] [ERROR] connection to ('0.0.0.0', 8000) failed: [Errno 98] Address already in use
+[2025-08-21 12:03:18 +0800] [2330160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2025-08-21 12:03:18 +0800] [2330160] [ERROR] connection to ('0.0.0.0', 8000) failed: [Errno 98] Address already in use
+[2025-08-21 12:03:19 +0800] [2330160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2025-08-21 12:03:19 +0800] [2330160] [ERROR] connection to ('0.0.0.0', 8000) failed: [Errno 98] Address already in use
+[2025-08-21 12:03:20 +0800] [2330160] [INFO] Listening at: http://0.0.0.0:8000 (2330160)
+[2025-08-21 12:03:20 +0800] [2330160] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 12:03:20 +0800] [2330329] [INFO] Booting worker with pid: 2330329
+[2025-08-21 12:03:20 +0800] [2330329] [INFO] Started server process [2330329]
+[2025-08-21 12:03:20 +0800] [2330329] [INFO] Waiting for application startup.
+[2025-08-21 12:03:20 +0800] [2330329] [INFO] Application startup complete.
+[2025-08-21 12:03:20 +0800] [2330331] [INFO] Booting worker with pid: 2330331
+[2025-08-21 12:03:20 +0800] [2330333] [INFO] Booting worker with pid: 2330333
+[2025-08-21 12:03:20 +0800] [2330331] [INFO] Started server process [2330331]
+[2025-08-21 12:03:20 +0800] [2330331] [INFO] Waiting for application startup.
+[2025-08-21 12:03:20 +0800] [2330331] [INFO] Application startup complete.
+[2025-08-21 12:03:20 +0800] [2330333] [INFO] Started server process [2330333]
+[2025-08-21 12:03:20 +0800] [2330333] [INFO] Waiting for application startup.
+[2025-08-21 12:03:20 +0800] [2330333] [INFO] Application startup complete.
+[2025-08-21 12:03:20 +0800] [2330335] [INFO] Booting worker with pid: 2330335
+[2025-08-21 12:03:20 +0800] [2330335] [INFO] Started server process [2330335]
+[2025-08-21 12:03:20 +0800] [2330335] [INFO] Waiting for application startup.
+[2025-08-21 12:03:20 +0800] [2330335] [INFO] Application startup complete.
+[2025-08-21 12:03:25 +0800] [2330160] [INFO] Handling signal: int
+[2025-08-21 12:03:25 +0800] [2330331] [INFO] Shutting down
+[2025-08-21 12:03:25 +0800] [2330331] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:03:25 +0800] [2330333] [INFO] Shutting down
+[2025-08-21 12:03:25 +0800] [2330333] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:03:25 +0800] [2330329] [INFO] Shutting down
+[2025-08-21 12:03:25 +0800] [2330329] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:03:25 +0800] [2330335] [INFO] Shutting down
+[2025-08-21 12:03:25 +0800] [2330335] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:03:25 +0800] [2330331] [INFO] Waiting for application shutdown.
+[2025-08-21 12:03:25 +0800] [2330331] [INFO] Application shutdown complete.
+[2025-08-21 12:03:25 +0800] [2330331] [INFO] Finished server process [2330331]
+[2025-08-21 12:03:25 +0800] [2330160] [ERROR] Worker (pid:2330331) was sent SIGINT!
+[2025-08-21 12:03:25 +0800] [2330333] [INFO] Waiting for application shutdown.
+[2025-08-21 12:03:25 +0800] [2330333] [INFO] Application shutdown complete.
+[2025-08-21 12:03:25 +0800] [2330333] [INFO] Finished server process [2330333]
+[2025-08-21 12:03:25 +0800] [2330160] [ERROR] Worker (pid:2330333) was sent SIGINT!
+[2025-08-21 12:03:25 +0800] [2330329] [INFO] Waiting for application shutdown.
+[2025-08-21 12:03:25 +0800] [2330329] [INFO] Application shutdown complete.
+[2025-08-21 12:03:25 +0800] [2330329] [INFO] Finished server process [2330329]
+[2025-08-21 12:03:25 +0800] [2330160] [ERROR] Worker (pid:2330329) was sent SIGINT!
+[2025-08-21 12:03:25 +0800] [2330335] [INFO] Waiting for application shutdown.
+[2025-08-21 12:03:25 +0800] [2330335] [INFO] Application shutdown complete.
+[2025-08-21 12:03:25 +0800] [2330335] [INFO] Finished server process [2330335]
+[2025-08-21 12:03:25 +0800] [2330160] [ERROR] Worker (pid:2330335) was sent SIGINT!
+[2025-08-21 12:03:25 +0800] [2330160] [INFO] Shutting down: Master
+[2025-08-21 12:03:28 +0800] [2330469] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 12:03:28 +0800] [2330469] [INFO] Listening at: http://0.0.0.0:8000 (2330469)
+[2025-08-21 12:03:28 +0800] [2330469] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 12:03:28 +0800] [2330501] [INFO] Booting worker with pid: 2330501
+[2025-08-21 12:03:28 +0800] [2330501] [INFO] Started server process [2330501]
+[2025-08-21 12:03:28 +0800] [2330501] [INFO] Waiting for application startup.
+[2025-08-21 12:03:28 +0800] [2330507] [INFO] Booting worker with pid: 2330507
+[2025-08-21 12:03:28 +0800] [2330501] [INFO] Application startup complete.
+[2025-08-21 12:03:28 +0800] [2330507] [INFO] Started server process [2330507]
+[2025-08-21 12:03:28 +0800] [2330507] [INFO] Waiting for application startup.
+[2025-08-21 12:03:28 +0800] [2330507] [INFO] Application startup complete.
+[2025-08-21 12:03:29 +0800] [2330509] [INFO] Booting worker with pid: 2330509
+[2025-08-21 12:03:29 +0800] [2330509] [INFO] Started server process [2330509]
+[2025-08-21 12:03:29 +0800] [2330509] [INFO] Waiting for application startup.
+[2025-08-21 12:03:29 +0800] [2330509] [INFO] Application startup complete.
+[2025-08-21 12:03:29 +0800] [2330514] [INFO] Booting worker with pid: 2330514
+[2025-08-21 12:03:29 +0800] [2330514] [INFO] Started server process [2330514]
+[2025-08-21 12:03:29 +0800] [2330514] [INFO] Waiting for application startup.
+[2025-08-21 12:03:29 +0800] [2330514] [INFO] Application startup complete.
+[2025-08-21 12:04:28 +0800] [2330469] [INFO] Handling signal: int
+[2025-08-21 12:04:28 +0800] [2330514] [INFO] Shutting down
+[2025-08-21 12:04:28 +0800] [2330514] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:04:28 +0800] [2330501] [INFO] Shutting down
+[2025-08-21 12:04:28 +0800] [2330501] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:04:28 +0800] [2330509] [INFO] Shutting down
+[2025-08-21 12:04:28 +0800] [2330509] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:04:28 +0800] [2330507] [INFO] Shutting down
+[2025-08-21 12:04:28 +0800] [2330507] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:04:28 +0800] [2330514] [INFO] Waiting for application shutdown.
+[2025-08-21 12:04:28 +0800] [2330514] [INFO] Application shutdown complete.
+[2025-08-21 12:04:28 +0800] [2330514] [INFO] Finished server process [2330514]
+[2025-08-21 12:04:28 +0800] [2330469] [ERROR] Worker (pid:2330514) was sent SIGINT!
+[2025-08-21 12:04:28 +0800] [2330501] [INFO] Waiting for application shutdown.
+[2025-08-21 12:04:28 +0800] [2330501] [INFO] Application shutdown complete.
+[2025-08-21 12:04:28 +0800] [2330501] [INFO] Finished server process [2330501]
+[2025-08-21 12:04:28 +0800] [2330509] [INFO] Waiting for application shutdown.
+[2025-08-21 12:04:28 +0800] [2330509] [INFO] Application shutdown complete.
+[2025-08-21 12:04:28 +0800] [2330509] [INFO] Finished server process [2330509]
+[2025-08-21 12:04:28 +0800] [2330469] [ERROR] Worker (pid:2330501) was sent SIGINT!
+[2025-08-21 12:04:28 +0800] [2330469] [ERROR] Worker (pid:2330509) was sent SIGINT!
+[2025-08-21 12:04:28 +0800] [2330507] [INFO] Waiting for application shutdown.
+[2025-08-21 12:04:28 +0800] [2330507] [INFO] Application shutdown complete.
+[2025-08-21 12:04:28 +0800] [2330507] [INFO] Finished server process [2330507]
+[2025-08-21 12:04:28 +0800] [2330469] [ERROR] Worker (pid:2330507) was sent SIGINT!
+[2025-08-21 12:04:28 +0800] [2330469] [INFO] Shutting down: Master
+[2025-08-21 12:05:05 +0800] [2331950] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 12:05:05 +0800] [2331950] [INFO] Listening at: http://0.0.0.0:8000 (2331950)
+[2025-08-21 12:05:05 +0800] [2331950] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 12:05:05 +0800] [2332029] [INFO] Booting worker with pid: 2332029
+[2025-08-21 12:05:05 +0800] [2332031] [INFO] Booting worker with pid: 2332031
+[2025-08-21 12:05:05 +0800] [2332029] [INFO] Started server process [2332029]
+[2025-08-21 12:05:05 +0800] [2332029] [INFO] Waiting for application startup.
+[2025-08-21 12:05:05 +0800] [2332029] [INFO] Application startup complete.
+[2025-08-21 12:05:05 +0800] [2332031] [INFO] Started server process [2332031]
+[2025-08-21 12:05:05 +0800] [2332031] [INFO] Waiting for application startup.
+[2025-08-21 12:05:05 +0800] [2332031] [INFO] Application startup complete.
+[2025-08-21 12:05:05 +0800] [2332033] [INFO] Booting worker with pid: 2332033
+[2025-08-21 12:05:05 +0800] [2332034] [INFO] Booting worker with pid: 2332034
+[2025-08-21 12:05:05 +0800] [2332033] [INFO] Started server process [2332033]
+[2025-08-21 12:05:05 +0800] [2332033] [INFO] Waiting for application startup.
+[2025-08-21 12:05:05 +0800] [2332033] [INFO] Application startup complete.
+[2025-08-21 12:05:05 +0800] [2332034] [INFO] Started server process [2332034]
+[2025-08-21 12:05:05 +0800] [2332034] [INFO] Waiting for application startup.
+[2025-08-21 12:05:05 +0800] [2332034] [INFO] Application startup complete.
+[2025-08-21 12:05:07 +0800] [2331950] [INFO] Handling signal: int
+[2025-08-21 12:05:07 +0800] [2332033] [INFO] Shutting down
+[2025-08-21 12:05:07 +0800] [2332033] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:05:07 +0800] [2332034] [INFO] Shutting down
+[2025-08-21 12:05:07 +0800] [2332034] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:05:07 +0800] [2332029] [INFO] Shutting down
+[2025-08-21 12:05:07 +0800] [2332029] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:05:07 +0800] [2332031] [INFO] Shutting down
+[2025-08-21 12:05:07 +0800] [2332031] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 12:05:07 +0800] [2332033] [INFO] Waiting for application shutdown.
+[2025-08-21 12:05:07 +0800] [2332033] [INFO] Application shutdown complete.
+[2025-08-21 12:05:07 +0800] [2332033] [INFO] Finished server process [2332033]
+[2025-08-21 12:05:07 +0800] [2331950] [ERROR] Worker (pid:2332033) was sent SIGINT!
+[2025-08-21 12:05:07 +0800] [2332034] [INFO] Waiting for application shutdown.
+[2025-08-21 12:05:07 +0800] [2332034] [INFO] Application shutdown complete.
+[2025-08-21 12:05:07 +0800] [2332034] [INFO] Finished server process [2332034]
+[2025-08-21 12:05:07 +0800] [2332029] [INFO] Waiting for application shutdown.
+[2025-08-21 12:05:07 +0800] [2332029] [INFO] Application shutdown complete.
+[2025-08-21 12:05:07 +0800] [2332029] [INFO] Finished server process [2332029]
+[2025-08-21 12:05:07 +0800] [2331950] [ERROR] Worker (pid:2332034) was sent SIGINT!
+[2025-08-21 12:05:07 +0800] [2331950] [ERROR] Worker (pid:2332029) was sent SIGINT!
+[2025-08-21 12:05:07 +0800] [2332031] [INFO] Waiting for application shutdown.
+[2025-08-21 12:05:07 +0800] [2332031] [INFO] Application shutdown complete.
+[2025-08-21 12:05:07 +0800] [2332031] [INFO] Finished server process [2332031]
+[2025-08-21 12:05:07 +0800] [2331950] [ERROR] Worker (pid:2332031) was sent SIGINT!
+[2025-08-21 12:05:07 +0800] [2331950] [INFO] Shutting down: Master
+[2025-08-21 13:57:49 +0800] [2433460] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 13:57:49 +0800] [2433460] [INFO] Listening at: http://0.0.0.0:8000 (2433460)
+[2025-08-21 13:57:49 +0800] [2433460] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 13:57:49 +0800] [2433533] [INFO] Booting worker with pid: 2433533
+[2025-08-21 13:57:49 +0800] [2433533] [INFO] Started server process [2433533]
+[2025-08-21 13:57:49 +0800] [2433533] [INFO] Waiting for application startup.
+[2025-08-21 13:57:49 +0800] [2433533] [INFO] Application startup complete.
+[2025-08-21 13:57:49 +0800] [2433535] [INFO] Booting worker with pid: 2433535
+[2025-08-21 13:57:49 +0800] [2433535] [INFO] Started server process [2433535]
+[2025-08-21 13:57:49 +0800] [2433535] [INFO] Waiting for application startup.
+[2025-08-21 13:57:49 +0800] [2433535] [INFO] Application startup complete.
+[2025-08-21 13:57:49 +0800] [2433540] [INFO] Booting worker with pid: 2433540
+[2025-08-21 13:57:49 +0800] [2433540] [INFO] Started server process [2433540]
+[2025-08-21 13:57:49 +0800] [2433540] [INFO] Waiting for application startup.
+[2025-08-21 13:57:49 +0800] [2433540] [INFO] Application startup complete.
+[2025-08-21 13:57:49 +0800] [2433542] [INFO] Booting worker with pid: 2433542
+[2025-08-21 13:57:49 +0800] [2433542] [INFO] Started server process [2433542]
+[2025-08-21 13:57:49 +0800] [2433542] [INFO] Waiting for application startup.
+[2025-08-21 13:57:49 +0800] [2433542] [INFO] Application startup complete.
+[2025-08-21 14:01:48 +0800] [2433460] [INFO] Handling signal: int
+[2025-08-21 14:01:48 +0800] [2433533] [INFO] Shutting down
+[2025-08-21 14:01:48 +0800] [2433533] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:01:48 +0800] [2433540] [INFO] Shutting down
+[2025-08-21 14:01:48 +0800] [2433540] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:01:48 +0800] [2433535] [INFO] Shutting down
+[2025-08-21 14:01:48 +0800] [2433535] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:01:48 +0800] [2433542] [INFO] Shutting down
+[2025-08-21 14:01:48 +0800] [2433542] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:01:48 +0800] [2433533] [INFO] Waiting for application shutdown.
+[2025-08-21 14:01:48 +0800] [2433533] [INFO] Application shutdown complete.
+[2025-08-21 14:01:48 +0800] [2433533] [INFO] Finished server process [2433533]
+[2025-08-21 14:01:48 +0800] [2433460] [ERROR] Worker (pid:2433533) was sent SIGINT!
+[2025-08-21 14:01:48 +0800] [2433540] [INFO] Waiting for application shutdown.
+[2025-08-21 14:01:48 +0800] [2433540] [INFO] Application shutdown complete.
+[2025-08-21 14:01:48 +0800] [2433540] [INFO] Finished server process [2433540]
+[2025-08-21 14:01:48 +0800] [2433460] [ERROR] Worker (pid:2433540) was sent SIGINT!
+[2025-08-21 14:01:48 +0800] [2433535] [INFO] Waiting for application shutdown.
+[2025-08-21 14:01:48 +0800] [2433535] [INFO] Application shutdown complete.
+[2025-08-21 14:01:48 +0800] [2433535] [INFO] Finished server process [2433535]
+[2025-08-21 14:01:48 +0800] [2433542] [INFO] Waiting for application shutdown.
+[2025-08-21 14:01:48 +0800] [2433542] [INFO] Application shutdown complete.
+[2025-08-21 14:01:48 +0800] [2433542] [INFO] Finished server process [2433542]
+[2025-08-21 14:01:48 +0800] [2433460] [ERROR] Worker (pid:2433535) was sent SIGINT!
+[2025-08-21 14:01:48 +0800] [2433460] [ERROR] Worker (pid:2433542) was sent SIGINT!
+[2025-08-21 14:01:48 +0800] [2433460] [INFO] Shutting down: Master
+[2025-08-21 14:25:28 +0800] [2458919] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:25:28 +0800] [2458919] [INFO] Listening at: http://0.0.0.0:8000 (2458919)
+[2025-08-21 14:25:28 +0800] [2458919] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:25:28 +0800] [2458967] [INFO] Booting worker with pid: 2458967
+[2025-08-21 14:25:28 +0800] [2458967] [INFO] Started server process [2458967]
+[2025-08-21 14:25:28 +0800] [2458967] [INFO] Waiting for application startup.
+[2025-08-21 14:25:28 +0800] [2458967] [INFO] Application startup complete.
+[2025-08-21 14:25:28 +0800] [2458969] [INFO] Booting worker with pid: 2458969
+[2025-08-21 14:25:28 +0800] [2458969] [INFO] Started server process [2458969]
+[2025-08-21 14:25:28 +0800] [2458969] [INFO] Waiting for application startup.
+[2025-08-21 14:25:28 +0800] [2458969] [INFO] Application startup complete.
+[2025-08-21 14:25:28 +0800] [2458971] [INFO] Booting worker with pid: 2458971
+[2025-08-21 14:25:28 +0800] [2458973] [INFO] Booting worker with pid: 2458973
+[2025-08-21 14:25:28 +0800] [2458971] [INFO] Started server process [2458971]
+[2025-08-21 14:25:28 +0800] [2458971] [INFO] Waiting for application startup.
+[2025-08-21 14:25:28 +0800] [2458971] [INFO] Application startup complete.
+[2025-08-21 14:25:28 +0800] [2458973] [INFO] Started server process [2458973]
+[2025-08-21 14:25:28 +0800] [2458973] [INFO] Waiting for application startup.
+[2025-08-21 14:25:28 +0800] [2458973] [INFO] Application startup complete.
+[2025-08-21 14:31:33 +0800] [2458919] [INFO] Handling signal: int
+[2025-08-21 14:31:33 +0800] [2458973] [INFO] Shutting down
+[2025-08-21 14:31:33 +0800] [2458971] [INFO] Shutting down
+[2025-08-21 14:31:33 +0800] [2458967] [INFO] Shutting down
+[2025-08-21 14:31:33 +0800] [2458973] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:31:33 +0800] [2458971] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:31:33 +0800] [2458967] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:31:33 +0800] [2458969] [INFO] Shutting down
+[2025-08-21 14:31:33 +0800] [2458969] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:31:34 +0800] [2458973] [INFO] Waiting for application shutdown.
+[2025-08-21 14:31:34 +0800] [2458971] [INFO] Waiting for application shutdown.
+[2025-08-21 14:31:34 +0800] [2458967] [INFO] Waiting for application shutdown.
+[2025-08-21 14:31:34 +0800] [2458971] [INFO] Application shutdown complete.
+[2025-08-21 14:31:34 +0800] [2458973] [INFO] Application shutdown complete.
+[2025-08-21 14:31:34 +0800] [2458967] [INFO] Application shutdown complete.
+[2025-08-21 14:31:34 +0800] [2458971] [INFO] Finished server process [2458971]
+[2025-08-21 14:31:34 +0800] [2458973] [INFO] Finished server process [2458973]
+[2025-08-21 14:31:34 +0800] [2458967] [INFO] Finished server process [2458967]
+[2025-08-21 14:31:34 +0800] [2458969] [INFO] Waiting for application shutdown.
+[2025-08-21 14:31:34 +0800] [2458969] [INFO] Application shutdown complete.
+[2025-08-21 14:31:34 +0800] [2458969] [INFO] Finished server process [2458969]
+[2025-08-21 14:31:34 +0800] [2458919] [ERROR] Worker (pid:2458967) was sent SIGINT!
+[2025-08-21 14:31:34 +0800] [2458919] [ERROR] Worker (pid:2458971) was sent SIGINT!
+[2025-08-21 14:31:34 +0800] [2458919] [ERROR] Worker (pid:2458973) was sent SIGINT!
+[2025-08-21 14:31:34 +0800] [2458919] [ERROR] Worker (pid:2458969) was sent SIGINT!
+[2025-08-21 14:31:34 +0800] [2458919] [INFO] Shutting down: Master
+[2025-08-21 14:31:48 +0800] [2465469] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:31:48 +0800] [2465469] [INFO] Listening at: http://0.0.0.0:8000 (2465469)
+[2025-08-21 14:31:48 +0800] [2465469] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:31:48 +0800] [2465509] [INFO] Booting worker with pid: 2465509
+[2025-08-21 14:31:48 +0800] [2465509] [INFO] Started server process [2465509]
+[2025-08-21 14:31:48 +0800] [2465509] [INFO] Waiting for application startup.
+[2025-08-21 14:31:48 +0800] [2465509] [INFO] Application startup complete.
+[2025-08-21 14:31:48 +0800] [2465511] [INFO] Booting worker with pid: 2465511
+[2025-08-21 14:31:48 +0800] [2465511] [INFO] Started server process [2465511]
+[2025-08-21 14:31:48 +0800] [2465511] [INFO] Waiting for application startup.
+[2025-08-21 14:31:48 +0800] [2465511] [INFO] Application startup complete.
+[2025-08-21 14:31:48 +0800] [2465516] [INFO] Booting worker with pid: 2465516
+[2025-08-21 14:31:48 +0800] [2465516] [INFO] Started server process [2465516]
+[2025-08-21 14:31:48 +0800] [2465516] [INFO] Waiting for application startup.
+[2025-08-21 14:31:48 +0800] [2465516] [INFO] Application startup complete.
+[2025-08-21 14:31:48 +0800] [2465518] [INFO] Booting worker with pid: 2465518
+[2025-08-21 14:31:48 +0800] [2465518] [INFO] Started server process [2465518]
+[2025-08-21 14:31:48 +0800] [2465518] [INFO] Waiting for application startup.
+[2025-08-21 14:31:48 +0800] [2465518] [INFO] Application startup complete.
+[2025-08-21 14:34:51 +0800] [2465469] [INFO] Handling signal: int
+[2025-08-21 14:34:51 +0800] [2465509] [INFO] Shutting down
+[2025-08-21 14:34:51 +0800] [2465509] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:34:51 +0800] [2465511] [INFO] Shutting down
+[2025-08-21 14:34:51 +0800] [2465518] [INFO] Shutting down
+[2025-08-21 14:34:51 +0800] [2465518] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:34:51 +0800] [2465511] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:34:51 +0800] [2465516] [INFO] Shutting down
+[2025-08-21 14:34:51 +0800] [2465516] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:34:51 +0800] [2465509] [INFO] Waiting for application shutdown.
+[2025-08-21 14:34:51 +0800] [2465509] [INFO] Application shutdown complete.
+[2025-08-21 14:34:51 +0800] [2465509] [INFO] Finished server process [2465509]
+[2025-08-21 14:34:51 +0800] [2465469] [ERROR] Worker (pid:2465509) was sent SIGINT!
+[2025-08-21 14:34:51 +0800] [2465511] [INFO] Waiting for application shutdown.
+[2025-08-21 14:34:51 +0800] [2465518] [INFO] Waiting for application shutdown.
+[2025-08-21 14:34:51 +0800] [2465518] [INFO] Application shutdown complete.
+[2025-08-21 14:34:51 +0800] [2465511] [INFO] Application shutdown complete.
+[2025-08-21 14:34:51 +0800] [2465518] [INFO] Finished server process [2465518]
+[2025-08-21 14:34:51 +0800] [2465511] [INFO] Finished server process [2465511]
+[2025-08-21 14:34:51 +0800] [2465469] [ERROR] Worker (pid:2465511) was sent SIGINT!
+[2025-08-21 14:34:51 +0800] [2465469] [ERROR] Worker (pid:2465518) was sent SIGINT!
+[2025-08-21 14:34:51 +0800] [2465516] [INFO] Waiting for connections to close. (CTRL+C to force quit)
+[2025-08-21 14:34:52 +0800] [2465516] [INFO] Finished server process [2465516]
+[2025-08-21 14:34:52 +0800] [2465469] [ERROR] Worker (pid:2465516) was sent SIGINT!
+[2025-08-21 14:34:52 +0800] [2465469] [INFO] Shutting down: Master
+[2025-08-21 14:36:46 +0800] [2470119] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:36:46 +0800] [2470119] [INFO] Listening at: http://0.0.0.0:8000 (2470119)
+[2025-08-21 14:36:46 +0800] [2470119] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:36:46 +0800] [2470198] [INFO] Booting worker with pid: 2470198
+[2025-08-21 14:36:46 +0800] [2470198] [INFO] Started server process [2470198]
+[2025-08-21 14:36:46 +0800] [2470198] [INFO] Waiting for application startup.
+[2025-08-21 14:36:46 +0800] [2470198] [INFO] Application startup complete.
+[2025-08-21 14:36:46 +0800] [2470200] [INFO] Booting worker with pid: 2470200
+[2025-08-21 14:36:46 +0800] [2470201] [INFO] Booting worker with pid: 2470201
+[2025-08-21 14:36:46 +0800] [2470200] [INFO] Started server process [2470200]
+[2025-08-21 14:36:46 +0800] [2470200] [INFO] Waiting for application startup.
+[2025-08-21 14:36:46 +0800] [2470200] [INFO] Application startup complete.
+[2025-08-21 14:36:46 +0800] [2470201] [INFO] Started server process [2470201]
+[2025-08-21 14:36:46 +0800] [2470201] [INFO] Waiting for application startup.
+[2025-08-21 14:36:46 +0800] [2470201] [INFO] Application startup complete.
+[2025-08-21 14:36:46 +0800] [2470204] [INFO] Booting worker with pid: 2470204
+[2025-08-21 14:36:46 +0800] [2470204] [INFO] Started server process [2470204]
+[2025-08-21 14:36:46 +0800] [2470204] [INFO] Waiting for application startup.
+[2025-08-21 14:36:46 +0800] [2470204] [INFO] Application startup complete.
+[2025-08-21 14:36:58 +0800] [2470119] [INFO] Handling signal: int
+[2025-08-21 14:36:58 +0800] [2470204] [INFO] Shutting down
+[2025-08-21 14:36:58 +0800] [2470204] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:36:58 +0800] [2470200] [INFO] Shutting down
+[2025-08-21 14:36:58 +0800] [2470200] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:36:58 +0800] [2470201] [INFO] Shutting down
+[2025-08-21 14:36:58 +0800] [2470201] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:36:58 +0800] [2470198] [INFO] Shutting down
+[2025-08-21 14:36:58 +0800] [2470198] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:36:58 +0800] [2470204] [INFO] Waiting for connections to close. (CTRL+C to force quit)
+[2025-08-21 14:36:58 +0800] [2470200] [INFO] Waiting for application shutdown.
+[2025-08-21 14:36:58 +0800] [2470200] [INFO] Application shutdown complete.
+[2025-08-21 14:36:58 +0800] [2470200] [INFO] Finished server process [2470200]
+[2025-08-21 14:36:58 +0800] [2470201] [INFO] Waiting for application shutdown.
+[2025-08-21 14:36:58 +0800] [2470201] [INFO] Application shutdown complete.
+[2025-08-21 14:36:58 +0800] [2470201] [INFO] Finished server process [2470201]
+[2025-08-21 14:36:58 +0800] [2470119] [ERROR] Worker (pid:2470200) was sent SIGINT!
+[2025-08-21 14:36:58 +0800] [2470119] [ERROR] Worker (pid:2470201) was sent SIGINT!
+[2025-08-21 14:36:58 +0800] [2470198] [INFO] Waiting for application shutdown.
+[2025-08-21 14:36:58 +0800] [2470198] [INFO] Application shutdown complete.
+[2025-08-21 14:36:58 +0800] [2470198] [INFO] Finished server process [2470198]
+[2025-08-21 14:36:58 +0800] [2470119] [ERROR] Worker (pid:2470198) was sent SIGINT!
+[2025-08-21 14:36:59 +0800] [2470204] [INFO] Finished server process [2470204]
+[2025-08-21 14:36:59 +0800] [2470119] [ERROR] Worker (pid:2470204) was sent SIGINT!
+[2025-08-21 14:36:59 +0800] [2470119] [INFO] Shutting down: Master
+[2025-08-21 14:37:06 +0800] [2470551] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:37:06 +0800] [2470551] [INFO] Listening at: http://0.0.0.0:8000 (2470551)
+[2025-08-21 14:37:06 +0800] [2470551] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:37:06 +0800] [2470606] [INFO] Booting worker with pid: 2470606
+[2025-08-21 14:37:06 +0800] [2470606] [INFO] Started server process [2470606]
+[2025-08-21 14:37:06 +0800] [2470606] [INFO] Waiting for application startup.
+[2025-08-21 14:37:06 +0800] [2470606] [INFO] Application startup complete.
+[2025-08-21 14:37:06 +0800] [2470608] [INFO] Booting worker with pid: 2470608
+[2025-08-21 14:37:06 +0800] [2470608] [INFO] Started server process [2470608]
+[2025-08-21 14:37:06 +0800] [2470608] [INFO] Waiting for application startup.
+[2025-08-21 14:37:06 +0800] [2470608] [INFO] Application startup complete.
+[2025-08-21 14:37:06 +0800] [2470610] [INFO] Booting worker with pid: 2470610
+[2025-08-21 14:37:06 +0800] [2470610] [INFO] Started server process [2470610]
+[2025-08-21 14:37:06 +0800] [2470610] [INFO] Waiting for application startup.
+[2025-08-21 14:37:06 +0800] [2470610] [INFO] Application startup complete.
+[2025-08-21 14:37:06 +0800] [2470612] [INFO] Booting worker with pid: 2470612
+[2025-08-21 14:37:06 +0800] [2470612] [INFO] Started server process [2470612]
+[2025-08-21 14:37:06 +0800] [2470612] [INFO] Waiting for application startup.
+[2025-08-21 14:37:06 +0800] [2470612] [INFO] Application startup complete.
+[2025-08-21 14:37:15 +0800] [2470551] [INFO] Handling signal: int
+[2025-08-21 14:37:15 +0800] [2470612] [INFO] Shutting down
+[2025-08-21 14:37:15 +0800] [2470612] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:37:15 +0800] [2470608] [INFO] Shutting down
+[2025-08-21 14:37:15 +0800] [2470608] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:37:15 +0800] [2470606] [INFO] Shutting down
+[2025-08-21 14:37:15 +0800] [2470606] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:37:15 +0800] [2470610] [INFO] Shutting down
+[2025-08-21 14:37:15 +0800] [2470610] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:37:15 +0800] [2470612] [INFO] Waiting for connections to close. (CTRL+C to force quit)
+[2025-08-21 14:37:15 +0800] [2470608] [INFO] Waiting for application shutdown.
+[2025-08-21 14:37:15 +0800] [2470608] [INFO] Application shutdown complete.
+[2025-08-21 14:37:15 +0800] [2470608] [INFO] Finished server process [2470608]
+[2025-08-21 14:37:15 +0800] [2470551] [ERROR] Worker (pid:2470608) was sent SIGINT!
+[2025-08-21 14:37:15 +0800] [2470606] [INFO] Waiting for application shutdown.
+[2025-08-21 14:37:15 +0800] [2470606] [INFO] Application shutdown complete.
+[2025-08-21 14:37:15 +0800] [2470606] [INFO] Finished server process [2470606]
+[2025-08-21 14:37:15 +0800] [2470551] [ERROR] Worker (pid:2470606) was sent SIGINT!
+[2025-08-21 14:37:15 +0800] [2470610] [INFO] Waiting for application shutdown.
+[2025-08-21 14:37:15 +0800] [2470610] [INFO] Application shutdown complete.
+[2025-08-21 14:37:15 +0800] [2470610] [INFO] Finished server process [2470610]
+[2025-08-21 14:37:15 +0800] [2470551] [ERROR] Worker (pid:2470610) was sent SIGINT!
+[2025-08-21 14:37:15 +0800] [2470612] [INFO] Finished server process [2470612]
+[2025-08-21 14:37:15 +0800] [2470551] [ERROR] Worker (pid:2470612) was sent SIGINT!
+[2025-08-21 14:37:16 +0800] [2470551] [INFO] Shutting down: Master
+[2025-08-21 14:38:42 +0800] [2472178] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:38:42 +0800] [2472178] [INFO] Listening at: http://0.0.0.0:8000 (2472178)
+[2025-08-21 14:38:42 +0800] [2472178] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:38:42 +0800] [2472252] [INFO] Booting worker with pid: 2472252
+[2025-08-21 14:38:42 +0800] [2472252] [INFO] Started server process [2472252]
+[2025-08-21 14:38:42 +0800] [2472252] [INFO] Waiting for application startup.
+[2025-08-21 14:38:42 +0800] [2472252] [INFO] Application startup complete.
+[2025-08-21 14:38:42 +0800] [2472254] [INFO] Booting worker with pid: 2472254
+[2025-08-21 14:38:42 +0800] [2472254] [INFO] Started server process [2472254]
+[2025-08-21 14:38:42 +0800] [2472254] [INFO] Waiting for application startup.
+[2025-08-21 14:38:42 +0800] [2472254] [INFO] Application startup complete.
+[2025-08-21 14:38:42 +0800] [2472256] [INFO] Booting worker with pid: 2472256
+[2025-08-21 14:38:42 +0800] [2472256] [INFO] Started server process [2472256]
+[2025-08-21 14:38:42 +0800] [2472256] [INFO] Waiting for application startup.
+[2025-08-21 14:38:42 +0800] [2472256] [INFO] Application startup complete.
+[2025-08-21 14:38:42 +0800] [2472258] [INFO] Booting worker with pid: 2472258
+[2025-08-21 14:38:42 +0800] [2472258] [INFO] Started server process [2472258]
+[2025-08-21 14:38:42 +0800] [2472258] [INFO] Waiting for application startup.
+[2025-08-21 14:38:42 +0800] [2472258] [INFO] Application startup complete.
+[2025-08-21 14:38:50 +0800] [2472178] [INFO] Handling signal: int
+[2025-08-21 14:38:50 +0800] [2472256] [INFO] Shutting down
+[2025-08-21 14:38:50 +0800] [2472256] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:38:50 +0800] [2472252] [INFO] Shutting down
+[2025-08-21 14:38:50 +0800] [2472252] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:38:50 +0800] [2472258] [INFO] Shutting down
+[2025-08-21 14:38:50 +0800] [2472258] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:38:50 +0800] [2472254] [INFO] Shutting down
+[2025-08-21 14:38:50 +0800] [2472254] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:38:50 +0800] [2472256] [INFO] Waiting for application shutdown.
+[2025-08-21 14:38:50 +0800] [2472256] [INFO] Application shutdown complete.
+[2025-08-21 14:38:50 +0800] [2472256] [INFO] Finished server process [2472256]
+[2025-08-21 14:38:50 +0800] [2472178] [ERROR] Worker (pid:2472256) was sent SIGINT!
+[2025-08-21 14:38:50 +0800] [2472252] [INFO] Waiting for application shutdown.
+[2025-08-21 14:38:50 +0800] [2472252] [INFO] Application shutdown complete.
+[2025-08-21 14:38:50 +0800] [2472252] [INFO] Finished server process [2472252]
+[2025-08-21 14:38:50 +0800] [2472178] [ERROR] Worker (pid:2472252) was sent SIGINT!
+[2025-08-21 14:38:50 +0800] [2472258] [INFO] Waiting for connections to close. (CTRL+C to force quit)
+[2025-08-21 14:38:50 +0800] [2472254] [INFO] Waiting for application shutdown.
+[2025-08-21 14:38:50 +0800] [2472254] [INFO] Application shutdown complete.
+[2025-08-21 14:38:50 +0800] [2472254] [INFO] Finished server process [2472254]
+[2025-08-21 14:38:50 +0800] [2472178] [ERROR] Worker (pid:2472254) was sent SIGINT!
+[2025-08-21 14:38:50 +0800] [2472258] [INFO] Finished server process [2472258]
+[2025-08-21 14:38:50 +0800] [2472178] [ERROR] Worker (pid:2472258) was sent SIGINT!
+[2025-08-21 14:38:50 +0800] [2472178] [INFO] Shutting down: Master
+[2025-08-21 14:39:03 +0800] [2472644] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:39:03 +0800] [2472644] [INFO] Listening at: http://0.0.0.0:8000 (2472644)
+[2025-08-21 14:39:03 +0800] [2472644] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:39:03 +0800] [2472710] [INFO] Booting worker with pid: 2472710
+[2025-08-21 14:39:03 +0800] [2472710] [INFO] Started server process [2472710]
+[2025-08-21 14:39:03 +0800] [2472710] [INFO] Waiting for application startup.
+[2025-08-21 14:39:03 +0800] [2472710] [INFO] Application startup complete.
+[2025-08-21 14:39:03 +0800] [2472712] [INFO] Booting worker with pid: 2472712
+[2025-08-21 14:39:03 +0800] [2472712] [INFO] Started server process [2472712]
+[2025-08-21 14:39:03 +0800] [2472712] [INFO] Waiting for application startup.
+[2025-08-21 14:39:03 +0800] [2472712] [INFO] Application startup complete.
+[2025-08-21 14:39:03 +0800] [2472717] [INFO] Booting worker with pid: 2472717
+[2025-08-21 14:39:03 +0800] [2472717] [INFO] Started server process [2472717]
+[2025-08-21 14:39:03 +0800] [2472717] [INFO] Waiting for application startup.
+[2025-08-21 14:39:03 +0800] [2472717] [INFO] Application startup complete.
+[2025-08-21 14:39:03 +0800] [2472719] [INFO] Booting worker with pid: 2472719
+[2025-08-21 14:39:03 +0800] [2472719] [INFO] Started server process [2472719]
+[2025-08-21 14:39:03 +0800] [2472719] [INFO] Waiting for application startup.
+[2025-08-21 14:39:03 +0800] [2472719] [INFO] Application startup complete.
+[2025-08-21 14:39:35 +0800] [2472644] [INFO] Handling signal: int
+[2025-08-21 14:39:35 +0800] [2472710] [INFO] Shutting down
+[2025-08-21 14:39:35 +0800] [2472710] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:39:35 +0800] [2472719] [INFO] Shutting down
+[2025-08-21 14:39:35 +0800] [2472719] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:39:35 +0800] [2472717] [INFO] Shutting down
+[2025-08-21 14:39:35 +0800] [2472717] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:39:35 +0800] [2472712] [INFO] Shutting down
+[2025-08-21 14:39:35 +0800] [2472712] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:39:35 +0800] [2472710] [INFO] Waiting for connections to close. (CTRL+C to force quit)
+[2025-08-21 14:39:35 +0800] [2472719] [INFO] Waiting for application shutdown.
+[2025-08-21 14:39:35 +0800] [2472719] [INFO] Application shutdown complete.
+[2025-08-21 14:39:35 +0800] [2472719] [INFO] Finished server process [2472719]
+[2025-08-21 14:39:35 +0800] [2472717] [INFO] Waiting for application shutdown.
+[2025-08-21 14:39:35 +0800] [2472717] [INFO] Application shutdown complete.
+[2025-08-21 14:39:35 +0800] [2472717] [INFO] Finished server process [2472717]
+[2025-08-21 14:39:35 +0800] [2472644] [ERROR] Worker (pid:2472719) was sent SIGINT!
+[2025-08-21 14:39:35 +0800] [2472644] [ERROR] Worker (pid:2472717) was sent SIGINT!
+[2025-08-21 14:39:35 +0800] [2472712] [INFO] Waiting for application shutdown.
+[2025-08-21 14:39:35 +0800] [2472712] [INFO] Application shutdown complete.
+[2025-08-21 14:39:35 +0800] [2472712] [INFO] Finished server process [2472712]
+[2025-08-21 14:39:35 +0800] [2472644] [ERROR] Worker (pid:2472712) was sent SIGINT!
+[2025-08-21 14:39:40 +0800] [2472710] [INFO] Finished server process [2472710]
+[2025-08-21 14:39:40 +0800] [2472644] [ERROR] Worker (pid:2472710) was sent SIGINT!
+[2025-08-21 14:39:40 +0800] [2472644] [INFO] Shutting down: Master
+[2025-08-21 14:39:54 +0800] [2473640] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:39:54 +0800] [2473640] [INFO] Listening at: http://0.0.0.0:8000 (2473640)
+[2025-08-21 14:39:54 +0800] [2473640] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:39:54 +0800] [2473680] [INFO] Booting worker with pid: 2473680
+[2025-08-21 14:39:54 +0800] [2473680] [INFO] Started server process [2473680]
+[2025-08-21 14:39:54 +0800] [2473680] [INFO] Waiting for application startup.
+[2025-08-21 14:39:54 +0800] [2473680] [INFO] Application startup complete.
+[2025-08-21 14:39:54 +0800] [2473682] [INFO] Booting worker with pid: 2473682
+[2025-08-21 14:39:54 +0800] [2473683] [INFO] Booting worker with pid: 2473683
+[2025-08-21 14:39:54 +0800] [2473682] [INFO] Started server process [2473682]
+[2025-08-21 14:39:54 +0800] [2473682] [INFO] Waiting for application startup.
+[2025-08-21 14:39:54 +0800] [2473682] [INFO] Application startup complete.
+[2025-08-21 14:39:54 +0800] [2473683] [INFO] Started server process [2473683]
+[2025-08-21 14:39:54 +0800] [2473683] [INFO] Waiting for application startup.
+[2025-08-21 14:39:54 +0800] [2473683] [INFO] Application startup complete.
+[2025-08-21 14:39:54 +0800] [2473686] [INFO] Booting worker with pid: 2473686
+[2025-08-21 14:39:54 +0800] [2473686] [INFO] Started server process [2473686]
+[2025-08-21 14:39:54 +0800] [2473686] [INFO] Waiting for application startup.
+[2025-08-21 14:39:54 +0800] [2473686] [INFO] Application startup complete.
+[2025-08-21 14:40:43 +0800] [2473640] [INFO] Handling signal: int
+[2025-08-21 14:40:43 +0800] [2473682] [INFO] Shutting down
+[2025-08-21 14:40:43 +0800] [2473682] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:40:43 +0800] [2473683] [INFO] Shutting down
+[2025-08-21 14:40:43 +0800] [2473683] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:40:43 +0800] [2473680] [INFO] Shutting down
+[2025-08-21 14:40:43 +0800] [2473680] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:40:43 +0800] [2473686] [INFO] Shutting down
+[2025-08-21 14:40:43 +0800] [2473686] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 14:40:43 +0800] [2473682] [INFO] Waiting for application shutdown.
+[2025-08-21 14:40:43 +0800] [2473682] [INFO] Application shutdown complete.
+[2025-08-21 14:40:43 +0800] [2473682] [INFO] Finished server process [2473682]
+[2025-08-21 14:40:43 +0800] [2473640] [ERROR] Worker (pid:2473682) was sent SIGINT!
+[2025-08-21 14:40:43 +0800] [2473683] [INFO] Waiting for connections to close. (CTRL+C to force quit)
+[2025-08-21 14:40:44 +0800] [2473680] [INFO] Waiting for application shutdown.
+[2025-08-21 14:40:44 +0800] [2473680] [INFO] Application shutdown complete.
+[2025-08-21 14:40:44 +0800] [2473680] [INFO] Finished server process [2473680]
+[2025-08-21 14:40:44 +0800] [2473640] [ERROR] Worker (pid:2473680) was sent SIGINT!
+[2025-08-21 14:40:44 +0800] [2473686] [INFO] Waiting for application shutdown.
+[2025-08-21 14:40:44 +0800] [2473686] [INFO] Application shutdown complete.
+[2025-08-21 14:40:44 +0800] [2473686] [INFO] Finished server process [2473686]
+[2025-08-21 14:40:44 +0800] [2473640] [ERROR] Worker (pid:2473686) was sent SIGINT!
+[2025-08-21 14:40:44 +0800] [2473683] [INFO] Finished server process [2473683]
+[2025-08-21 14:40:44 +0800] [2473640] [ERROR] Worker (pid:2473683) was sent SIGINT!
+[2025-08-21 14:40:44 +0800] [2473640] [INFO] Shutting down: Master
+[2025-08-21 14:42:01 +0800] [2475875] [INFO] Starting gunicorn 23.0.0
+[2025-08-21 14:42:01 +0800] [2475875] [INFO] Listening at: http://0.0.0.0:8000 (2475875)
+[2025-08-21 14:42:01 +0800] [2475875] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-08-21 14:42:01 +0800] [2475938] [INFO] Booting worker with pid: 2475938
+[2025-08-21 14:42:01 +0800] [2475939] [INFO] Booting worker with pid: 2475939
+[2025-08-21 14:42:01 +0800] [2475938] [INFO] Started server process [2475938]
+[2025-08-21 14:42:01 +0800] [2475938] [INFO] Waiting for application startup.
+[2025-08-21 14:42:01 +0800] [2475938] [INFO] Application startup complete.
+[2025-08-21 14:42:01 +0800] [2475939] [INFO] Started server process [2475939]
+[2025-08-21 14:42:01 +0800] [2475939] [INFO] Waiting for application startup.
+[2025-08-21 14:42:01 +0800] [2475939] [INFO] Application startup complete.
+[2025-08-21 14:42:02 +0800] [2475942] [INFO] Booting worker with pid: 2475942
+[2025-08-21 14:42:02 +0800] [2475942] [INFO] Started server process [2475942]
+[2025-08-21 14:42:02 +0800] [2475942] [INFO] Waiting for application startup.
+[2025-08-21 14:42:02 +0800] [2475942] [INFO] Application startup complete.
+[2025-08-21 14:42:02 +0800] [2475944] [INFO] Booting worker with pid: 2475944
+[2025-08-21 14:42:02 +0800] [2475944] [INFO] Started server process [2475944]
+[2025-08-21 14:42:02 +0800] [2475944] [INFO] Waiting for application startup.
+[2025-08-21 14:42:02 +0800] [2475944] [INFO] Application startup complete.
+[2025-08-21 14:42:37 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:42:38 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:42:48 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:42:48 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:42:57 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:42:58 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:43:39 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:43:40 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:43:44 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:43:44 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:45:54 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:45:54 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:47:08 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:47:52 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:47:52 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:48:29 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:48:29 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:48:33 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:48:33 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:48:43 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:48:43 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:49:49 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:49:49 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:50:09 +0800] [2475939] [WARNING] Unsupported upgrade request.
+[2025-08-21 14:50:09 +0800] [2475939] [WARNING] Invalid HTTP request received.
+[2025-08-21 14:50:50 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:50:51 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:51:01 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:51:02 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:51:38 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:51:39 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:52:26 +0800] [2475944] [WARNING] Unsupported upgrade request.
+[2025-08-21 14:52:26 +0800] [2475944] [WARNING] Invalid HTTP request received.
+[2025-08-21 14:53:00 +0800] [2475938] [WARNING] Unsupported upgrade request.
+[2025-08-21 14:53:00 +0800] [2475938] [WARNING] Invalid HTTP request received.
+[2025-08-21 14:54:45 +0800] [2475939] [WARNING] Unsupported upgrade request.
+[2025-08-21 14:54:45 +0800] [2475939] [WARNING] Invalid HTTP request received.
+[2025-08-21 14:54:53 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:54:53 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:55:57 +0800] [2475944] [WARNING] Unsupported upgrade request.
+[2025-08-21 14:55:57 +0800] [2475944] [WARNING] Invalid HTTP request received.
+[2025-08-21 14:57:12 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:57:12 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:57:16 +0800] [2475944] [WARNING] Unsupported upgrade request.
+[2025-08-21 14:57:16 +0800] [2475944] [WARNING] Invalid HTTP request received.
+[2025-08-21 14:57:17 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 14:57:17 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:01:16 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:01:16 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:01:26 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:01:26 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:03:01 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:03:01 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:18 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:18 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:20 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:20 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:36 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:36 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:39 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:40 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:52 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:04:52 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:05:30 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:05:31 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:05:33 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:05:33 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:05:52 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:08:23 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:08:23 +0800] [2475875] [INFO] Handling signal: winch
+[2025-08-21 15:14:04 +0800] [2475875] [INFO] Handling signal: int
+[2025-08-21 15:14:04 +0800] [2475944] [INFO] Shutting down
+[2025-08-21 15:14:04 +0800] [2475944] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 15:14:04 +0800] [2475942] [INFO] Shutting down
+[2025-08-21 15:14:04 +0800] [2475942] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 15:14:04 +0800] [2475938] [INFO] Shutting down
+[2025-08-21 15:14:04 +0800] [2475938] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 15:14:04 +0800] [2475939] [INFO] Shutting down
+[2025-08-21 15:14:04 +0800] [2475939] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2025-08-21 15:14:05 +0800] [2475944] [INFO] Waiting for application shutdown.
+[2025-08-21 15:14:05 +0800] [2475944] [INFO] Application shutdown complete.
+[2025-08-21 15:14:05 +0800] [2475944] [INFO] Finished server process [2475944]
+[2025-08-21 15:14:05 +0800] [2475875] [ERROR] Worker (pid:2475944) was sent SIGINT!
+[2025-08-21 15:14:05 +0800] [2475942] [INFO] Waiting for application shutdown.
+[2025-08-21 15:14:05 +0800] [2475942] [INFO] Application shutdown complete.
+[2025-08-21 15:14:05 +0800] [2475942] [INFO] Finished server process [2475942]
+[2025-08-21 15:14:05 +0800] [2475938] [INFO] Waiting for application shutdown.
+[2025-08-21 15:14:05 +0800] [2475938] [INFO] Application shutdown complete.
+[2025-08-21 15:14:05 +0800] [2475938] [INFO] Finished server process [2475938]
+[2025-08-21 15:14:05 +0800] [2475875] [ERROR] Worker (pid:2475942) was sent SIGINT!
+[2025-08-21 15:14:05 +0800] [2475939] [INFO] Waiting for application shutdown.
+[2025-08-21 15:14:05 +0800] [2475939] [INFO] Application shutdown complete.
+[2025-08-21 15:14:05 +0800] [2475939] [INFO] Finished server process [2475939]
+[2025-08-21 15:14:05 +0800] [2475875] [ERROR] Worker (pid:2475938) was sent SIGINT!
+[2025-08-21 15:14:05 +0800] [2475875] [ERROR] Worker (pid:2475939) was sent SIGINT!
+[2025-08-21 15:14:05 +0800] [2475875] [INFO] Shutting down: Master

@@ -2,15 +2,20 @@ __pycache__/
 .github/
 .vscode/
 /config/
-/data/
-/logs/
+/data/*
+/.mypy_cache/
 /notebook/
-/scripts/
+/scripts/*
 /ssl/
 /test/
 /requirements.in
 /.env
 /requirements.txt.bak
 /docker-compose.yml.bak
+
+
+!scripts/test_localfile.py
+!data/input.json
+!data/body.txt
 
 
