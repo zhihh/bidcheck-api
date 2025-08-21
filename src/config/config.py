@@ -28,6 +28,9 @@ class Config:
         os.environ["LANGSMITH_ENDPOINT"] = "https://api.smith.langchain.com"
         os.environ["LANGSMITH_API_KEY"] = "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"
         os.environ["LANGSMITH_PROJECT"] = "BidCheck"
+        
+        # 调试配置
+        os.environ["DEBUG_REQUEST_BODY"] = os.getenv("DEBUG_REQUEST_BODY", "true")
     
     def _setup_logging(self):
         """设置日志配置"""
@@ -52,3 +55,8 @@ class Config:
     @property
     def langsmith_project(self) -> str:
         return os.environ.get("LANGSMITH_PROJECT", "BidCheck")
+    
+    @property
+    def debug_request_body(self) -> bool:
+        """是否开启请求体调试日志"""
+        return os.environ.get("DEBUG_REQUEST_BODY", "false").lower() in ("true", "1", "yes", "on")

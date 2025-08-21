@@ -4,15 +4,20 @@ FastAPI应用定义
 """
 
 import logging
+import json
 from datetime import datetime
-from typing import List
-from fastapi import FastAPI, HTTPException
+from typing import List, Any, Optional
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from ..models.api_models import DocumentInput, ApiResponse
 from .service import DocumentDeduplicationService
+from ..config.config import Config
 
 logger = logging.getLogger(__name__)
+
+# 创建配置实例
+config = Config()
 
 # 创建FastAPI应用
 app = FastAPI(
@@ -51,9 +56,9 @@ async def health_check():
 
 
 @app.post("/api/v2/analyze", response_model=ApiResponse)
-async def analyze_documents(documents: List[DocumentInput]):
+async def analyze_documents(request: Request, documents: List[DocumentInput]):
     """
-    分析文档重复内容
+    分析文档重复内容 - 异步并发版本
     
     输入格式:
     [
@@ -68,10 +73,34 @@ async def analyze_documents(documents: List[DocumentInput]):
     """
     start_time = datetime.now()
     
+    # 获取原始请求体用于调试（可通过环境变量控制）
+    if config.debug_request_body:
+        try:
+            request_body = await request.body()
+            request_text = request_body.decode('utf-8')
+            logger.info(f"🔍 [DEBUG] 收到请求，原始请求体: {request_text}")
+            logger.info(f"📊 [DEBUG] 请求头: {dict(request.headers)}")
+            logger.info(f"🎯 [DEBUG] 解析后的文档数量: {len(documents)}")
+            
+            # 记录解析后的文档结构
+            for i, doc in enumerate(documents[:3]):  # 只记录前3个文档避免日志过长
+                logger.info(f"📄 [DEBUG] 文档 {i+1}: documentId={doc.documentId}, page={doc.page}, content长度={len(doc.content)}")
+                logger.info(f"📄 [DEBUG] 文档 {i+1} 内容前100字符: {doc.content[:100]}...")
+                
+        except Exception as e:
+            logger.error(f"❌ [DEBUG] 获取请求体失败: {e}")
+    else:
+        logger.info(f"📨 收到分析请求，文档数量: {len(documents)}")
+        # 重新读取请求体用于重新构造request对象（因为body只能读取一次）
+        # 这里我们直接使用已解析的documents
+    
     try:
         # 验证输入
         if not documents:
+            logger.warning("⚠️ 输入文档为空")
             raise HTTPException(status_code=400, detail="输入文档不能为空")
+        
+        logger.info(f"✅ 输入验证通过，文档数量: {len(documents)}")
         
         # 转换为字典格式
         json_input = [
@@ -83,11 +112,15 @@ async def analyze_documents(documents: List[DocumentInput]):
             for doc in documents
         ]
         
-        # 执行分析
-        duplicate_results = deduplication_service.analyze_documents(json_input)
+        logger.info(f"🔄 转换为内部格式完成")
+        
+        # 执行异步分析
+        duplicate_results = await deduplication_service.analyze_documents(json_input)
         
         # 计算处理时间
         processing_time = (datetime.now() - start_time).total_seconds()
+        
+        logger.info(f"✅ 分析完成，发现 {len(duplicate_results)} 对重复内容，耗时 {processing_time:.2f}秒")
         
         return ApiResponse(
             success=True,
@@ -97,8 +130,12 @@ async def analyze_documents(documents: List[DocumentInput]):
             processing_time=processing_time
         )
         
+    except HTTPException as he:
+        logger.error(f"❌ HTTP异常: {he.detail}")
+        raise he
     except Exception as e:
-        logger.error(f"API调用失败: {e}")
+        logger.error(f"❌ API调用失败: {e}")
+        logger.error(f"❌ 异常类型: {type(e).__name__}")
         processing_time = (datetime.now() - start_time).total_seconds()
         
         return ApiResponse(
@@ -108,6 +145,102 @@ async def analyze_documents(documents: List[DocumentInput]):
             total_count=0,
             processing_time=processing_time
         )
+
+
+@app.post("/api/v2/debug/toggle")
+async def toggle_debug_mode(enable: Optional[bool] = None):
+    """动态切换调试模式
+    
+    Args:
+        enable: true开启调试，false关闭调试，不传参数则切换当前状态
+    """
+    import os
+    
+    current_state = config.debug_request_body
+    
+    if enable is None:
+        # 切换当前状态
+        new_state = not current_state
+    else:
+        new_state = enable
+    
+    # 动态修改环境变量
+    os.environ["DEBUG_REQUEST_BODY"] = "true" if new_state else "false"
+    
+    logger.info(f"🔧 调试模式已{'开启' if new_state else '关闭'} (原状态: {'开启' if current_state else '关闭'})")
+    
+    return {
+        "status": "success",
+        "message": f"调试模式已{'开启' if new_state else '关闭'}",
+        "previous_state": current_state,
+        "current_state": new_state,
+        "usage": {
+            "开启调试": "POST /api/v2/debug/toggle?enable=true",
+            "关闭调试": "POST /api/v2/debug/toggle?enable=false", 
+            "切换状态": "POST /api/v2/debug/toggle"
+        }
+    }
+
+
+@app.get("/api/v2/debug/status")
+async def get_debug_status():
+    """获取当前调试状态"""
+    return {
+        "debug_request_body": config.debug_request_body,
+        "message": f"请求体调试日志当前{'已开启' if config.debug_request_body else '已关闭'}",
+        "controls": {
+            "开启调试": "POST /api/v2/debug/toggle?enable=true",
+            "关闭调试": "POST /api/v2/debug/toggle?enable=false",
+            "切换状态": "POST /api/v2/debug/toggle"
+        }
+    }
+
+
+@app.post("/api/v2/debug")
+async def debug_request(request: Request):
+    """调试端点 - 记录原始请求体用于调试422错误"""
+    try:
+        # 获取原始请求体
+        request_body = await request.body()
+        request_text = request_body.decode('utf-8')
+        
+        logger.info("=" * 60)
+        logger.info("🔍 调试请求信息")
+        logger.info("=" * 60)
+        logger.info(f"📊 请求头: {dict(request.headers)}")
+        logger.info(f"🎯 Content-Type: {request.headers.get('content-type', 'Not Set')}")
+        logger.info(f"📏 请求体长度: {len(request_body)} 字节")
+        logger.info(f"📄 原始请求体:")
+        logger.info(request_text)
+        logger.info("=" * 60)
+        
+        # 尝试解析JSON
+        try:
+            parsed_json = json.loads(request_text)
+            logger.info(f"✅ JSON解析成功，类型: {type(parsed_json)}")
+            if isinstance(parsed_json, list):
+                logger.info(f"📊 数组长度: {len(parsed_json)}")
+                if parsed_json:
+                    logger.info(f"🎯 第一个元素: {parsed_json[0]}")
+                    logger.info(f"🔑 第一个元素的键: {list(parsed_json[0].keys()) if isinstance(parsed_json[0], dict) else 'Not a dict'}")
+            elif isinstance(parsed_json, dict):
+                logger.info(f"🔑 对象的键: {list(parsed_json.keys())}")
+        except json.JSONDecodeError as e:
+            logger.error(f"❌ JSON解析失败: {e}")
+        
+        return {
+            "status": "debug_success",
+            "message": "请求信息已记录到日志",
+            "content_length": len(request_body),
+            "content_type": request.headers.get('content-type', 'Not Set')
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ 调试端点异常: {e}")
+        return {
+            "status": "debug_error",
+            "message": f"调试失败: {str(e)}"
+        }
 
 
 @app.get("/api/v2/status")
@@ -123,8 +256,8 @@ async def get_status():
 
 
 @app.post("/api/v2/test")
-async def test_with_sample_data():
-    """使用示例数据测试API"""
+async def test_with_sample_data(request: Request):
+    """使用示例数据测试API - 异步版本"""
     # 生成测试数据
     test_data = [
         {
@@ -147,5 +280,5 @@ async def test_with_sample_data():
     # 转换为DocumentInput对象
     documents = [DocumentInput(**item) for item in test_data]
     
-    # 调用分析接口
-    return await analyze_documents(documents)
+    # 调用异步分析接口
+    return await analyze_documents(request, documents)
