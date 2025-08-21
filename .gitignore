@@ -12,6 +12,8 @@ __pycache__/
 /.env
 /requirements.txt.bak
 /docker-compose.yml.bak
+/logs/*
+/docker-compose.yml
 
 
 !scripts/test_localfile.py
