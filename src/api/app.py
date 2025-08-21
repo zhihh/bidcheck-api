@@ -9,6 +9,8 @@ from datetime import datetime
 from typing import List, Any, Optional
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 
 from ..models.api_models import DocumentInput, ApiResponse
 from .service import DocumentDeduplicationService
@@ -34,6 +36,149 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 请求日志中间件 - 在所有处理之前记录
+@app.middleware("http")
+async def request_logging_middleware(request: Request, call_next):
+    """请求日志中间件 - 无条件捕获所有请求"""
+    
+    # 无条件记录所有请求信息
+    logger.info("🚨" + "=" * 80)
+    logger.info("� [RAW REQUEST] 收到原始请求")
+    logger.info("🚨" + "=" * 80)
+    logger.info(f"📍 URL: {request.url}")
+    logger.info(f"📝 方法: {request.method}")
+    logger.info(f"🌐 客户端: {request.client.host if request.client else 'Unknown'}:{request.client.port if request.client else 'Unknown'}")
+    logger.info(f"� 所有请求头:")
+    for name, value in request.headers.items():
+        logger.info(f"    {name}: {value}")
+    
+    # 读取请求体
+    body = await request.body()
+    logger.info(f"📏 请求体字节长度: {len(body)}")
+    
+    if body:
+        logger.info("📄 原始请求体 (字节):")
+        logger.info(f"    {body}")
+        
+        try:
+            # 尝试UTF-8解码
+            body_str = body.decode('utf-8')
+            logger.info("📄 请求体 (UTF-8字符串):")
+            logger.info(f"    {repr(body_str)}")
+            logger.info("📄 请求体 (显示内容):")
+            logger.info(body_str)
+            
+            # 尝试JSON解析
+            try:
+                parsed = json.loads(body_str)
+                logger.info("✅ JSON解析成功:")
+                logger.info(json.dumps(parsed, ensure_ascii=False, indent=2))
+                
+                # 详细分析数据结构
+                if isinstance(parsed, list):
+                    logger.info(f"📊 数据类型: 数组，长度: {len(parsed)}")
+                    for i, item in enumerate(parsed[:3]):  # 只显示前3个
+                        logger.info(f"🔸 元素[{i}]: {type(item)} = {item}")
+                        if isinstance(item, dict):
+                            logger.info(f"    键: {list(item.keys())}")
+                elif isinstance(parsed, dict):
+                    logger.info(f"📊 数据类型: 对象")
+                    logger.info(f"🔑 对象键: {list(parsed.keys())}")
+                    for key, value in list(parsed.items())[:5]:  # 只显示前5个键值对
+                        logger.info(f"    {key}: {type(value)} = {value}")
+                        
+            except json.JSONDecodeError as je:
+                logger.error(f"❌ JSON解析失败: {je}")
+                logger.error(f"    位置: 行{je.lineno}, 列{je.colno}")
+                logger.error(f"    消息: {je.msg}")
+                
+        except UnicodeDecodeError as ue:
+            logger.error(f"❌ UTF-8解码失败: {ue}")
+            logger.info(f"� 尝试其他编码...")
+            try:
+                body_str = body.decode('latin1')
+                logger.info(f"📄 Latin1解码: {body_str}")
+            except:
+                logger.error("❌ 所有编码尝试都失败")
+                
+        except Exception as e:
+            logger.error(f"❌ 请求体处理异常: {e}")
+    else:
+        logger.info("📄 请求体为空")
+    
+    logger.info("🚨" + "=" * 80)
+    
+    # 重新构造请求对象（因为body只能读一次）
+    async def receive():
+        return {"type": "http.request", "body": body}
+    
+    request._receive = receive
+    
+    # 继续处理请求
+    try:
+        response = await call_next(request)
+        logger.info(f"📤 [RESPONSE] 状态码: {response.status_code}")
+        return response
+    except Exception as e:
+        logger.error(f"❌ [MIDDLEWARE ERROR] 处理请求时异常: {e}")
+        logger.error(f"    异常类型: {type(e).__name__}")
+        raise
+
+# 422验证错误处理器
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """422验证错误处理器 - 捕获数据验证失败"""
+    logger.error("🚨 " + "=" * 60)
+    logger.error("🚨 422 数据验证错误")
+    logger.error("🚨 " + "=" * 60)
+    logger.error(f"📍 请求路径: {request.url.path}")
+    logger.error(f"📝 请求方法: {request.method}")
+    logger.error(f"❌ 验证错误详情:")
+    
+    for error in exc.errors():
+        logger.error(f"  🔸 位置: {' -> '.join(str(loc) for loc in error['loc'])}")
+        logger.error(f"  🔸 错误: {error['msg']}")
+        logger.error(f"  🔸 类型: {error['type']}")
+        if 'input' in error:
+            logger.error(f"  🔸 输入值: {error['input']}")
+    
+    # 尝试再次读取请求体
+    try:
+        body = await request.body()
+        if body:
+            body_str = body.decode('utf-8')
+            logger.error(f"📄 失败的请求体: {body_str}")
+            
+            # 尝试解析JSON查看结构
+            try:
+                parsed = json.loads(body_str)
+                logger.error(f"📊 解析后的JSON结构:")
+                logger.error(json.dumps(parsed, ensure_ascii=False, indent=2))
+            except:
+                pass
+    except Exception as e:
+        logger.error(f"❌ 无法读取请求体: {e}")
+    
+    logger.error("🚨 " + "=" * 60)
+    
+    return JSONResponse(
+        status_code=422,
+        content={
+            "error": "请求数据验证失败",
+            "message": "数据格式不符合API要求",
+            "details": exc.errors(),
+            "expected_format": {
+                "example": [
+                    {
+                        "documentId": 1,
+                        "page": 1,
+                        "content": "文档内容"
+                    }
+                ]
+            }
+        }
+    )
 
 # 初始化服务
 deduplication_service = DocumentDeduplicationService()
