@@ -14,8 +14,10 @@ def write_json(data, file_path):
 
 def call_deduplication_api(input_data):
     """调用查重API"""
+
 #    url = "http://gfda7a93.natappfree.cc/api/v2/analyze"
     url = "http://localhost:8000/api/v2/analyze"
+
     headers = {"Content-Type": "application/json"}
     response = requests.post(url, json=input_data, headers=headers)
     if response.status_code == 200:

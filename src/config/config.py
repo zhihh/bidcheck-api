@@ -18,10 +18,21 @@ class Config:
         # OpenAI 配置
         os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY", "")
         os.environ["OPENAI_BASE_URL"] = os.getenv("OPENAI_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
+        os.environ["DASHSCOPE_API_KEY"] = os.getenv("DASHSCOPE_API_KEY", os.getenv("OPENAI_API_KEY", ""))
         
         # 模型配置
         os.environ["LLM_MODEL_NAME"] = os.getenv("LLM_MODEL_NAME", "qwen-turbo")
         os.environ["EMBEDDING_MODEL_NAME"] = os.getenv("EMBEDDING_MODEL_NAME", "text-embedding-v4")
+        
+        # 聚类配置
+        os.environ["CLUSTERING_STRATEGY"] = os.getenv("CLUSTERING_STRATEGY", "enhanced")  # "legacy" 或 "enhanced"
+        os.environ["SIMILARITY_THRESHOLD"] = os.getenv("SIMILARITY_THRESHOLD", "0.8")
+        os.environ["TOP_K_CANDIDATES"] = os.getenv("TOP_K_CANDIDATES", "1")
+        os.environ["USE_RERANKER"] = os.getenv("USE_RERANKER", "true")
+        os.environ["MAX_RERANK_CANDIDATES"] = os.getenv("MAX_RERANK_CANDIDATES", "4")
+        
+        # DashScope 配置（for reranker）
+        os.environ["DASHSCOPE_API_KEY"] = os.getenv("DASHSCOPE_API_KEY", "")
         
         # LangSmith 配置
         os.environ["LANGSMITH_TRACING"] = "true"
@@ -60,3 +71,34 @@ class Config:
     def debug_request_body(self) -> bool:
         """是否开启请求体调试日志"""
         return os.environ.get("DEBUG_REQUEST_BODY", "false").lower() in ("true", "1", "yes", "on")
+    
+    # 新增聚类相关配置属性
+    @property
+    def clustering_strategy(self) -> str:
+        """聚类策略"""
+        return os.environ.get("CLUSTERING_STRATEGY", "enhanced")
+    
+    @property
+    def similarity_threshold(self) -> float:
+        """相似度阈值"""
+        return float(os.environ.get("SIMILARITY_THRESHOLD", "0.7"))
+    
+    @property
+    def top_k_candidates(self) -> int:
+        """TOP-K候选数量"""
+        return int(os.environ.get("TOP_K_CANDIDATES", "10"))
+    
+    @property
+    def use_reranker(self) -> bool:
+        """是否使用reranker"""
+        return os.environ.get("USE_RERANKER", "true").lower() in ("true", "1", "yes", "on")
+    
+    @property
+    def max_rerank_candidates(self) -> int:
+        """最大rerank候选数"""
+        return int(os.environ.get("MAX_RERANK_CANDIDATES", "20"))
+    
+    @property
+    def dashscope_api_key(self) -> str:
+        """DashScope API密钥"""
+        return os.environ.get("DASHSCOPE_API_KEY", "")

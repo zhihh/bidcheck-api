@@ -16,6 +16,7 @@ from ..core.document_processor import DocumentProcessor
 from ..core.clustering_manager import ClusteringManager
 from ..detectors.llm_duplicate_detector import LLMDuplicateDetector
 from ..validators.validation_manager import ValidationManager
+from ..config.config import Config
 
 logger = logging.getLogger(__name__)
 
@@ -24,12 +25,23 @@ class DocumentDeduplicationService:
     """文档查重服务 - 高并发版本"""
     
     def __init__(self):
+        self.config = Config()
         self.processor = DocumentProcessor()
-        self.clustering_manager = ClusteringManager()
+        
+        # 使用配置初始化聚类管理器
+        self.clustering_manager = ClusteringManager(
+            top_k=self.config.top_k_candidates,
+            similarity_threshold=self.config.similarity_threshold,
+            use_reranker=self.config.use_reranker,
+            max_candidates_for_rerank=self.config.max_rerank_candidates
+        )
+        
         self.detector = LLMDuplicateDetector()
         self.validator = ValidationManager()
         # 移除全局锁，支持并发处理
         self.max_workers = 4  # 可根据服务器配置调整
+        
+        logger.info(f"文档查重服务初始化完成，使用增强版聚类策略")
     
     async def analyze_documents(self, json_input: List[Dict]) -> List[DuplicateOutput]:
         """分析文档重复内容 - 高并发异步处理版本"""
