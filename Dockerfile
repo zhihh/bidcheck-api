@@ -26,6 +26,7 @@ ENV HTTPS_PROXY=""
 # 复制应用代码
 COPY main.py .
 COPY src/ ./src/
+COPY gunicorn.conf.py .
 
 # 创建非root用户
 RUN useradd --create-home --shell /bin/bash app \
@@ -40,4 +41,4 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
 # 启动命令
-CMD ["python", "main.py"]
+CMD ["/bin/sh", "-c", "gunicorn --config gunicorn.conf.py main:app > logs/bidcheck-api.log 2>&1"]
