@@ -32,7 +32,7 @@ if __name__ == "__main__":
         workers=workers,  # 多工作进程
         log_level="info", 
         access_log=True,
-        reload=False,  # 生产环境关闭自动重载
+        reload=True,  # 生产环境关闭自动重载
         loop="uvloop",  # 使用高性能事件循环
         http="httptools"  # 使用高性能HTTP解析器
     )

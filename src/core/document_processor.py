@@ -7,13 +7,62 @@ import os
 import logging
 from typing import List, Tuple, Dict
 from openai import OpenAI
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_experimental.text_splitter import SemanticChunker
+from langchain_core.embeddings import Embeddings
 from langchain.schema import Document
 
 from ..models.api_models import DocumentInput
 from ..models.data_models import TextSegment, DocumentData
 
 logger = logging.getLogger(__name__)
+
+
+class CustomEmbeddings(Embeddings):
+    """自定义嵌入类，兼容阿里云DashScope API"""
+    
+    def __init__(self, client: OpenAI, model: str, dimensions: int = 1024):
+        self.client = client
+        self.model = model
+        self.dimensions = dimensions
+    
+    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+        """嵌入多个文档"""
+        all_embeddings = []
+        batch_size = 10
+        
+        for i in range(0, len(texts), batch_size):
+            batch_texts = texts[i:i + batch_size]
+            try:
+                response = self.client.embeddings.create(
+                    model=self.model,
+                    input=batch_texts,
+                    dimensions=self.dimensions,
+                    encoding_format="float"
+                )
+                batch_embeddings = [item.embedding for item in response.data]
+                all_embeddings.extend(batch_embeddings)
+            except Exception as e:
+                logger.error(f"嵌入生成失败: {e}")
+                # 返回零向量作为回退
+                for _ in batch_texts:
+                    all_embeddings.append([0.0] * self.dimensions)
+        
+        return all_embeddings
+    
+    def embed_query(self, text: str) -> List[float]:
+        """嵌入单个查询"""
+        try:
+            response = self.client.embeddings.create(
+                model=self.model,
+                input=[text],
+                dimensions=self.dimensions,
+                encoding_format="float"
+            )
+            return response.data[0].embedding
+        except Exception as e:
+            logger.error(f"查询嵌入生成失败: {e}")
+            # 返回零向量作为回退
+            return [0.0] * self.dimensions
 
 
 class DocumentProcessor:
@@ -24,12 +73,18 @@ class DocumentProcessor:
             api_key=os.environ.get("OPENAI_API_KEY"),
             base_url=os.environ.get("OPENAI_BASE_URL")
         )
-        # 初始化LangChain文本分割器
-        self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=300,  # 每个片段的字符数
-            chunk_overlap=50,  # 滑动窗口重叠字符数
-            length_function=len,
-            separators=["\n\n", "\n", "。", "！", "？", "；", " ", ""]  # 分割符号优先级
+        # 使用自定义嵌入类，兼容阿里云DashScope API
+        embeddings = CustomEmbeddings(
+            client=self.client,
+            model=os.environ.get("EMBEDDING_MODEL_NAME", "text-embedding-v4"),
+            dimensions=1024
+        )
+        self.text_splitter = SemanticChunker(
+            embeddings=embeddings,
+            breakpoint_threshold_type="percentile",  # 使用百分位数阈值
+            breakpoint_threshold_amount=95,  # 95%百分位数作为阈值
+            buffer_size=1,  # 缓冲区大小
+            sentence_split_regex=r'(?<=[。！？；])\s*',  # 中文句子分割正则
         )
         # 从环境变量获取模型名
         self.embedding_model_name = os.environ.get("EMBEDDING_MODEL_NAME", "text-embedding-v4")
@@ -72,7 +127,7 @@ class DocumentProcessor:
         return document_data_list, original_inputs
     
     def segment_documents(self, document_inputs: List[DocumentInput]) -> List[TextSegment]:
-        """基于LangChain滑动窗口分割文档，支持跨页面分割"""
+        """基于语义相似性分割文档，支持跨页面的智能分块"""
         all_segments = []
         
         # 按文档ID分组
@@ -82,7 +137,7 @@ class DocumentProcessor:
                 docs_by_id[doc_input.documentId] = []
             docs_by_id[doc_input.documentId].append(doc_input)
         
-        # 对每个文档进行分割
+        # 对每个文档进行语义分割
         for doc_id, doc_pages in docs_by_id.items():
             # 按页码排序
             doc_pages.sort(key=lambda x: x.page)
@@ -104,46 +159,59 @@ class DocumentProcessor:
                 logger.warning(f"文档 {doc_id} 内容为空")
                 continue
             
-            # 使用LangChain分割器
-            langchain_doc = Document(
-                page_content=combined_content,
-                metadata={"document_id": doc_id}
-            )
-            
-            chunks = self.text_splitter.split_documents([langchain_doc])
-            
-            # 转换为TextSegment对象，确定每个片段所属的页面
-            for chunk_id, chunk in enumerate(chunks, 1):
-                chunk_content = chunk.page_content.strip()
-                if not chunk_content:
-                    continue
+            # 使用语义分块器进行分割
+            try:
+                chunks = self.text_splitter.split_text(combined_content)
                 
-                # 找到片段在合并内容中的位置
-                chunk_start = combined_content.find(chunk_content)
-                if chunk_start == -1:
-                    # 如果找不到精确匹配，使用第一个页面
-                    page_num = doc_pages[0].page
-                else:
-                    # 根据位置确定所属页面（使用片段开始位置所在的页面）
-                    page_num = doc_pages[0].page  # 默认值
-                    for start_pos, end_pos, page in page_boundaries:
-                        if start_pos <= chunk_start < end_pos:
-                            page_num = page
-                            break
-                
-                segment_id = f"doc_{doc_id}_page_{page_num}_chunk_{chunk_id}"
-                
-                segment = TextSegment(
-                    id=segment_id,
-                    content=chunk_content,
-                    document_id=doc_id,
-                    page=page_num,
-                    chunk_id=chunk_id
-                )
-                
-                all_segments.append(segment)
+                # 转换为TextSegment对象，确定每个片段所属的页面
+                for chunk_id, chunk_content in enumerate(chunks, 1):
+                    chunk_content = chunk_content.strip()
+                    if not chunk_content:
+                        continue
+                    
+                    # 找到片段在合并内容中的位置
+                    chunk_start = combined_content.find(chunk_content)
+                    if chunk_start == -1:
+                        # 如果找不到精确匹配，使用第一个页面
+                        page_num = doc_pages[0].page
+                    else:
+                        # 根据位置确定所属页面（使用片段开始位置所在的页面）
+                        page_num = doc_pages[0].page  # 默认值
+                        for start_pos, end_pos, page in page_boundaries:
+                            if start_pos <= chunk_start < end_pos:
+                                page_num = page
+                                break
+                    
+                    segment_id = f"doc_{doc_id}_page_{page_num}_semantic_chunk_{chunk_id}"
+                    
+                    segment = TextSegment(
+                        id=segment_id,
+                        content=chunk_content,
+                        document_id=doc_id,
+                        page=page_num,
+                        chunk_id=chunk_id
+                    )
+                    
+                    all_segments.append(segment)
+                    
+            except Exception as e:
+                logger.error(f"对文档 {doc_id} 进行语义分割时出错: {e}")
+                # 回退到简单的按句子分割
+                sentences = combined_content.split('。')
+                for chunk_id, sentence in enumerate(sentences, 1):
+                    sentence = sentence.strip()
+                    if sentence:
+                        segment_id = f"doc_{doc_id}_fallback_chunk_{chunk_id}"
+                        segment = TextSegment(
+                            id=segment_id,
+                            content=sentence + '。',
+                            document_id=doc_id,
+                            page=doc_pages[0].page,
+                            chunk_id=chunk_id
+                        )
+                        all_segments.append(segment)
         
-        logger.info(f"使用LangChain滑动窗口分割，共生成 {len(all_segments)} 个文本片段")
+        logger.info(f"使用语义分块器，共生成 {len(all_segments)} 个文本片段")
         return all_segments
     
     def generate_embeddings(self, segments: List[TextSegment]) -> List[TextSegment]:
