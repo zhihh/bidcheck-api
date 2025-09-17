@@ -318,7 +318,25 @@ docker push zhihh/bidcheck-api:latest
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证。详情请参阅 [LICENSE](LICENSE) 文件。
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+本项目采用 Creative Commons Attribution-NonCommercial 4.0 International License 许可证。
+
+### 重要声明：本项目禁止用于商业用途
+
+您可以：
+
+- ✅ 分享 — 在任何媒介或格式下复制并重新分发该项目
+- ✅ 改编 — 重新编译、转换和基于该项目进行创作
+
+但必须遵循以下条件：
+
+- 📝 署名 — 您必须给予适当的署名，提供指向许可协议的链接，并指出是否对原始作品进行了修改
+- 🚫 非商业性使用 — 您不得将该项目用于商业目的
+
+如需商业使用授权，请通过 GitHub Issues 或邮件联系项目维护者。
+
+详情请参阅 [LICENSE](LICENSE) 文件。
 
 ## 🆘 技术支持
 
