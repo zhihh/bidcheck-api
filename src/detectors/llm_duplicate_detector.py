@@ -169,7 +169,8 @@ class LLMDuplicateDetector:
 注意：
 1. category字段：1-语义相似，2-错误一致，3-报价异常
 2. 对于每个发现的问题，详细说明原因
-3. 返回有效的JSON格式，不要添加其他文字"""
+3. 返回有效的JSON格式，不要添加其他文字
+"""""
     
     def detect_duplicates_parallel(self, clusters_dict: Dict[int, List[TextSegment]]) -> List[DuplicateOutput]:
         """并行检测多个聚类中的重复内容"""
@@ -370,7 +371,8 @@ class LLMDuplicateDetector:
                                         content2=content2,
                                         prefix2=prefix2,
                                         suffix2=suffix2,
-                                        reason=str(pair['reason']),
+                                        # reason=str(pair['reason']),
+                                        reason=str(pair['reason']+" [直接比较]"),
                                         score=float(pair["score"]),
                                         category=int(pair.get("category", 1))  # 默认为语义相似
                                     )

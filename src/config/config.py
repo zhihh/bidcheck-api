@@ -26,13 +26,20 @@ class Config:
         
         # 聚类配置
         os.environ["CLUSTERING_STRATEGY"] = os.getenv("CLUSTERING_STRATEGY", "enhanced")  # "legacy" 或 "enhanced"
-        os.environ["SIMILARITY_THRESHOLD"] = os.getenv("SIMILARITY_THRESHOLD", "0.8")
-        os.environ["TOP_K_CANDIDATES"] = os.getenv("TOP_K_CANDIDATES", "1")
+        os.environ["SIMILARITY_THRESHOLD"] = os.getenv("SIMILARITY_THRESHOLD", "0.6")
+        os.environ["TOP_K_CANDIDATES"] = os.getenv("TOP_K_CANDIDATES", "8")
         os.environ["USE_RERANKER"] = os.getenv("USE_RERANKER", "true")
         os.environ["MAX_RERANK_CANDIDATES"] = os.getenv("MAX_RERANK_CANDIDATES", "4")
         
         # DashScope 配置（for reranker）
         os.environ["DASHSCOPE_API_KEY"] = os.getenv("DASHSCOPE_API_KEY", "")
+        
+        # 验证管理器配置
+        os.environ["VALIDATION_STRATEGY"] = os.getenv("VALIDATION_STRATEGY", "optimized")  # "legacy" 或 "optimized"
+        os.environ["VALIDATION_SIMILARITY_THRESHOLD"] = os.getenv("VALIDATION_SIMILARITY_THRESHOLD", "0.5")
+        os.environ["VALIDATION_VECTOR_THRESHOLD"] = os.getenv("VALIDATION_VECTOR_THRESHOLD", "0.5")
+        os.environ["VALIDATION_MAX_WORKERS"] = os.getenv("VALIDATION_MAX_WORKERS", "16")
+        os.environ["VALIDATION_USE_GPU"] = os.getenv("VALIDATION_USE_GPU", "true")
         
         # LangSmith 配置
         os.environ["LANGSMITH_TRACING"] = "true"
@@ -102,3 +109,29 @@ class Config:
     def dashscope_api_key(self) -> str:
         """DashScope API密钥"""
         return os.environ.get("DASHSCOPE_API_KEY", "")
+    
+    # 验证管理器相关配置属性
+    @property
+    def validation_strategy(self) -> str:
+        """验证策略"""
+        return os.environ.get("VALIDATION_STRATEGY", "optimized")
+    
+    @property
+    def validation_similarity_threshold(self) -> float:
+        """验证相似度阈值"""
+        return float(os.environ.get("VALIDATION_SIMILARITY_THRESHOLD", "0.7"))
+    
+    @property
+    def validation_vector_threshold(self) -> float:
+        """验证向量相似度阈值"""
+        return float(os.environ.get("VALIDATION_VECTOR_THRESHOLD", "0.95"))
+    
+    @property
+    def validation_max_workers(self) -> int:
+        """验证最大工作线程数"""
+        return int(os.environ.get("VALIDATION_MAX_WORKERS", "16"))
+    
+    @property
+    def validation_use_gpu(self) -> bool:
+        """验证是否使用GPU"""
+        return os.environ.get("VALIDATION_USE_GPU", "true").lower() in ("true", "1", "yes", "on")
