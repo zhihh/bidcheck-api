@@ -20,4 +20,9 @@ __pycache__/
 !data/input.json
 !data/body.txt
 
+.DS_Store
+/src/.DS_Store
+
+
+
 
